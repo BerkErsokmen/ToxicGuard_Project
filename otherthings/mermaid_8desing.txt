@@ -1,0 +1,148 @@
+
+graph LR
+    subgraph Actors
+         MOD[" Platform Moderator"]
+        DA[" Data Analyst"]
+        ADMIN[" System Administrator"]
+        ML[" ML Pipeline"]
+    end
+
+    subgraph ToxicGuardSystem["toxicGuard System"]
+        UC1["UC-1: Analyze Single Comment"]
+        UC2["UC-2: Request LIME Explanation"]
+        UC3["UC-3: Batch Analyze File"]
+        UC4["UC-4: Compare All Models"]
+        UC5["UC-5: View EDA Visualizations"]
+        UC6["UC-6: Review Model Metrics"]
+        UC7["UC-7: Switch Language"]
+        UC8["UC-8: Select Model Version"]
+        UC9["UC-9: Manage Model Deployment"]
+        UC10["UC-10: Train and Evaluate Models"]
+    end
+
+    MOD --> UC1
+    MOD --> UC2
+    MOD --> UC3
+    MOD --> UC4
+    MOD --> UC7
+    MOD --> UC8
+
+    DA --> UC5
+    DA --> UC6
+
+    ADMIN --> UC9
+
+    ML --> UC10
+
+    UC1 -.-> UC2
+    UC1 -.-> UC8
+    UC3 -.-> UC8
+    UC10 -.-> UC9
+
+
+
+
+
+
+-----------------------------------
+
+
+
+classDiagram
+    class StreamlitApp {
+        -ui_theme: str
+        -selected_version: str
+        -page: str
+        +main()
+        +show_prediction_page()
+        +show_all_models_page()
+        +show_comparison_page()
+        +show_eda_page()
+        +show_model_comparison_page()
+        +get_cached_predictor(version): ToxicityPredictor
+    }
+
+    class ToxicityPredictor {
+        -version: str
+        -model: object
+        -vectorizer: TfidfVectorizer
+        -tokenizer: AutoTokenizer
+        -threshold: float
+        -threshold_config: dict
+        -is_transformer: bool
+        -label_cols: list
+        +predict_text(text): PredictionResult
+        +predict_batch(texts): list
+        +predict_file(content, type, col): DataFrame
+        +predict_proba_for_lime(texts): ndarray
+    }
+
+    class TextPreprocessor {
+        -stop_words: set
+        +clean_text(text): str
+        -remove_html(text): str
+        -remove_urls(text): str
+        -remove_stopwords(text): str
+    }
+
+    class TfidfFeatureExtractor {
+        -max_features: int
+        -ngram_range: tuple
+        -min_df: int
+        -max_df: float
+        -sublinear_tf: bool
+        -vectorizer: TfidfVectorizer
+        +fit_transform(texts): sparse_matrix
+        +transform(texts): sparse_matrix
+        +save_vectorizer(path)
+    }
+
+    class ModelTrainer {
+        -label_cols: list
+        +train_logistic_regression(X, y): model
+        +train_random_forest(X, y): model
+        +train_svm(X, y): model
+        +train_xgboost(X, y): model
+        +evaluate_model(model, X, y): dict
+        +select_best_result(results): dict
+        +run_training()
+    }
+
+    class PredictionResult {
+        +original_text: str
+        +cleaned_text: str
+        +scores: dict
+        +predictions: dict
+        +overall_score: float
+        +level: dict
+        +is_toxic: bool
+        +version: str
+        +threshold_used: float
+    }
+
+    class LIMEExplainer {
+        -class_names: list
+        -num_features: int
+        -num_samples: int
+        +explain_instance(text, predict_fn): Explanation
+        +render_html(explanation): str
+    }
+
+    class ModelVersionConfig {
+        +version_id: str
+        +name: str
+        +description: str
+        +best_model: str
+        +model_path: str
+        +threshold: float
+    }
+
+    StreamlitApp "1" --> "1..*" ToxicityPredictor : creates/caches
+    ToxicityPredictor "1" --> "1" TextPreprocessor : uses
+    ToxicityPredictor "1" --> "0..1" TfidfFeatureExtractor : uses
+    ToxicityPredictor "1" --> "*" PredictionResult : produces
+    ToxicityPredictor "1" --> "1" ModelVersionConfig : configured by
+    StreamlitApp "1" --> "1" LIMEExplainer : creates
+    LIMEExplainer "1" --> "1" ToxicityPredictor : queries
+    ModelTrainer "1" --> "1" TfidfFeatureExtractor : uses
+    ModelTrainer "1" ..> "1" ToxicityPredictor : artifacts consumed by

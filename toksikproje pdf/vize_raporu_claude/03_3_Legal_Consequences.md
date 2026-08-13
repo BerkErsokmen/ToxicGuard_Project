@@ -1,0 +1,7 @@
+## 2.3. Legal Consequences
+
+Automated content moderation systems operate within a complex international legal landscape. Primary legal obligations concern **data privacy**: processing user-generated text must comply with the EU General Data Protection Regulation (GDPR) and comparable frameworks (CCPA, Turkey's KVKK), requiring data minimization, proper anonymization of personal information, and transparent processing practices.
+
+A second critical domain concerns **freedom of expression**. Automated classifiers that produce false positives — incorrectly flagging legitimate speech — could expose deploying organizations to claims of viewpoint discrimination or contractual violations. The EU's Digital Services Act (DSA) places explicit accountability obligations on platforms using automated moderation, requiring accessible appeals mechanisms and algorithmic transparency reporting.
+
+Finally, if a system demonstrably produces discriminatory outcomes — disproportionately suppressing content from specific demographic groups — deploying organizations may face liability under anti-discrimination law. ToxicGuard's design mitigates these legal risks through LIME-based prediction auditing [12] (providing a documented decision trail), the human-in-the-loop operational model (automated outputs serve as recommendations, not autonomous enforcement), and ongoing bias monitoring disaggregated by text characteristics.

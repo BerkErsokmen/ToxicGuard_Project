@@ -1,0 +1,23 @@
+{
+  "model_name": "ToxicGuard-Irony",
+  "version": "V5.22-Stage2",
+  "base_model": "roberta-base",
+  "datasets": [
+    "SemEval-2018-Task3A",
+    "SARC-Reddit-Sarcasm"
+  ],
+  "train_size": 26097,
+  "val_size": 3259,
+  "test_size": 3262,
+  "f1_macro": 0.7465,
+  "accuracy": 0.7471,
+  "id2label": {
+    "0": "non_irony",
+    "1": "irony"
+  },
+  "label2id": {
+    "non_irony": 0,
+    "irony": 1
+  },
+  "irony_threshold": 0.5
+}

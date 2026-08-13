@@ -1,0 +1,12 @@
+{
+  "best_model": "Linear SVM",
+  "threshold": 0.3500000000000001,
+  "opt_thresholds": {
+    "Logistic Regression": 0.6500000000000001,
+    "Linear SVM": 0.3500000000000001,
+    "XGBoost": 0.6500000000000001
+  },
+  "training_notes": "clean_text_v2_1 + optimize edilmis threshold",
+  "tfidf_file": "tfidf_vectorizer.pkl",
+  "model_file": "best_model.pkl"
+}

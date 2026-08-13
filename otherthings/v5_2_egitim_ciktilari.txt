@@ -1,0 +1,330 @@
+🆕 V5.2 Değişiklikleri
+Değişiklik	V5.1	V5.2
+Loss fonksiyonu	BCEWithLogitsLoss (varsayılan)	Focal Loss (nadir sınıflara odak)
+Epoch sayısı	2	3
+TweetEval Hate	Yok	Eklendi (threat için)
+Jigsaw Bias	Opsiyonel	Opsiyonel (eklenirse daha iyi)
+📥 Drive Klasör Yapısı
+Kesin yol: MyDrive/ToxicGuard/data/
+
+Dosya	Kaynak	Zorunlu?
+train.csv	Kaggle Jigsaw	✅ Var
+jigsaw_bias_train.csv	Kaggle Bias	Önerilir
+train-balanced-sarcasm.csv	Kaggle SARC	Önerilir
+-----------
+
+
+Mounted at /content/drive
+✅ Drive bağlantısı tamam!
+   DATA_DIR → /content/drive/MyDrive/ToxicGuard/data
+
+📂 Drive'daki data/ klasörü içeriği:
+   📁 X_test.pkl  (12.0 MB)
+   📁 X_test_v2.pkl  (13.9 MB)
+   📁 X_test_v2_1.pkl  (70.1 MB)
+   📁 X_train_v2.pkl  (56.3 MB)
+   📁 X_train_v2_1.pkl  (70.1 MB)
+   ✅ gercek_temizlenmis_veri.csv  (39.1 MB)
+   ✅ gercek_temizlenmis_veri_v2.csv  (41.3 MB)
+   ✅ gercek_temizlenmis_veri_v2_1.csv  (41.3 MB)
+   ✅ jigsaw_bias_train.csv  (778.4 MB)
+   ✅ train-balanced-sarcasm.csv  (243.4 MB)
+   ✅ train.csv  (65.6 MB)
+   📁 y_test.pkl  (1.7 MB)
+   📁 y_test_v2.pkl  (1.7 MB)
+   📁 y_test_v2_1.pkl  (7.3 MB)
+   📁 y_train_v2.pkl  (6.8 MB)
+   📁 y_train_v2_1.pkl  (7.3 MB)
+
+   -----------------------
+
+   Cihaz: GPU Aktif! 🚀
+Etiketler: ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+-----------------
+
+✅ Focal Loss tanımlandı!
+   gamma=2.0, alpha=0.25
+   threat etiketine ~2.2x daha fazla odaklanacak
+
+   ----------------------------
+
+✅ Kaggle Orijinal → 64,900 satır
+   threat örnekleri: 478 (önemli — nadir!)
+
+-----------------------
+
+  Ham boyut: 1,804,874 satır
+
+  Tam veri seti nadir sınıf sayıları:
+    threat: 4,280 örnek
+    severe_toxic: 494 örnek
+    identity_hate: 13,410 örnek
+
+✅ Jigsaw Bias (akıllı örnekleme) → 52,653 satır
+   Nadir sınıf koruması:
+    threat       : 4,280 örnek  (önceki: 769)
+    severe_toxic : 494 örnek
+    identity_hate: 13,410 örnek
+
+-----------------
+
+📥 TweetEval Hate Speech yükleniyor (HuggingFace)...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+README.md: 
+ 23.9k/? [00:00<00:00, 1.73MB/s]
+hate/train-00000-of-00001.parquet: 100%
+ 816k/816k [00:01<00:00, 4.07MB/s]
+hate/test-00000-of-00001.parquet: 100%
+ 278k/278k [00:02<00:00, 1.39MB/s]
+hate/validation-00000-of-00001.parquet: 100%
+ 103k/103k [00:00<00:00, 513kB/s]
+Generating train split: 100%
+ 9000/9000 [00:00<00:00, 6286.74 examples/s]
+Generating test split: 100%
+ 2970/2970 [00:00<00:00, 117537.39 examples/s]
+Generating validation split: 100%
+ 1000/1000 [00:00<00:00, 41552.45 examples/s]
+✅ TweetEval Hate → 12,959 tweet
+   Hate: 5,462 | Normal: 7,497
+
+---------------------
+
+✅ SemEval-2018 Irony → 3,834 tweet
+
+-------
+
+✅ SARC Reddit → 28,301 yorum
+
+------
+
+🇹🇷 Overfit-GM Türkçe yükleniyor...
+README.md: 
+ 1.98k/? [00:00<00:00, 83.7kB/s]
+turkish_toxic_language.csv: 100%
+ 18.2M/18.2M [00:01<00:00, 91.2MB/s]
+Generating train split: 100%
+ 77800/77800 [00:00<00:00, 144095.75 examples/s]
+✅ Overfit-GM Türkçe → 77,800 yorum
+
+
+---------------------
+
+🇹🇷 Toygar Türkçe Offensive yükleniyor...
+README.md: 
+ 2.33k/? [00:00<00:00, 128kB/s]
+train.csv: 
+ 5.75M/? [00:00<00:00, 71.4MB/s]
+valid.csv: 
+ 224k/? [00:00<00:00, 15.9MB/s]
+test.csv: 
+ 1.18M/? [00:00<00:00, 35.5MB/s]
+Generating train split: 100%
+ 42398/42398 [00:00<00:00, 204365.92 examples/s]
+Generating validation split: 100%
+ 1756/1756 [00:00<00:00, 39180.54 examples/s]
+Generating test split: 100%
+ 8851/8851 [00:00<00:00, 142543.66 examples/s]
+✅ Toygar TR Offensive → 53,005 yorum
+
+------------------------------
+
+🔀 Birleştiriliyor...
+============================================================
+  ✅ Kaggle Jigsaw Orijinal   :   64,900 satır
+  ✅ Jigsaw Unintended Bias   :   52,584 satır
+  ✅ TweetEval Hate [YENİ]    :   12,959 satır
+  ✅ SemEval-2018 Irony       :    3,833 satır
+  ✅ SARC Reddit              :   28,301 satır
+  ✅ Overfit-GM Türkçe        :   77,782 satır
+  ✅ Toygar TR Offensive      :   53,005 satır
+============================================================
+
+🌍 TOPLAM: 293,364 satır
+
+📊 Etiket Dağılımı:
+   toxic           : 133,414  (45.5%) ██████████████████████
+   severe_toxic    :   2,088  ( 0.7%) 
+   obscene         :  28,207  ( 9.6%) ████
+   threat          :   4,758  ( 1.6%) 
+   insult          :  67,053  (22.9%) ███████████
+   identity_hate   :  31,384  (10.7%) █████
+
+-----------------------------------------
+
+   ✅ Dataset: DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels'],
+        num_rows: 264027
+    })
+    test: Dataset({
+        features: ['text', 'labels'],
+        num_rows: 29337
+    })
+})
+
+📥 xlm-roberta-base tokenizer yükleniyor...
+config.json: 100%
+ 615/615 [00:00<00:00, 65.9kB/s]
+tokenizer_config.json: 100%
+ 25.0/25.0 [00:00<00:00, 2.58kB/s]
+sentencepiece.bpe.model: 100%
+ 5.07M/5.07M [00:01<00:00, 4.53MB/s]
+tokenizer.json: 
+ 9.10M/? [00:01<00:00, 6.61MB/s]
+Tokenization başlıyor (~3-5 dk)...
+Map: 100%
+ 264027/264027 [01:13<00:00, 3518.18 examples/s]
+Map: 100%
+ 29337/29337 [00:07<00:00, 3897.72 examples/s]
+✅ Tokenization tamamlandı!
+------------------------
+
+🤖 xlm-roberta-base yükleniyor...
+model.safetensors: 100%
+ 1.12G/1.12G [00:36<00:00, 27.7MB/s]
+Loading weights: 100%
+ 197/197 [00:00<00:00, 496.03it/s, Materializing param=roberta.encoder.layer.11.output.dense.weight]
+XLMRobertaForSequenceClassification LOAD REPORT from: xlm-roberta-base
+Key                         | Status     | 
+----------------------------+------------+-
+roberta.pooler.dense.bias   | UNEXPECTED | 
+lm_head.dense.weight        | UNEXPECTED | 
+lm_head.dense.bias          | UNEXPECTED | 
+lm_head.layer_norm.bias     | UNEXPECTED | 
+lm_head.bias                | UNEXPECTED | 
+roberta.pooler.dense.weight | UNEXPECTED | 
+lm_head.layer_norm.weight   | UNEXPECTED | 
+classifier.dense.bias       | MISSING    | 
+classifier.dense.weight     | MISSING    | 
+classifier.out_proj.weight  | MISSING    | 
+classifier.out_proj.bias    | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+✅ Model: 278,048,262 parametre (278M)
+   UNEXPECTED/MISSING uyarıları normal — sorun yok.
+
+------------------------------------
+
+
+✅ Metrik fonksiyonu tanımlandı (threat F1 ayrı takip ediliyor).
+
+------------------------
+
+✅ Focal Loss Trainer hazır!
+   Eğitim: 264,027 | Test: 29,337
+   Epoch: 3 | Loss: Focal (gamma=2.0, alpha=0.25)
+   Tahmini süre: ~40-55 dk (T4 GPU, 3 epoch)
+
+-------------------
+
+🚀 ToxicGuard V5.2 — Focal Loss Eğitimi Başlıyor!
+   Her epoch'ta f1_threat takip edilecek — artmalı!
+------------------------------------------------------------
+ [24753/24753 1:47:26, Epoch 3/3]
+Epoch	Training Loss	Validation Loss	F1 Macro	F1 Micro	Roc Auc	F1 Toxic	F1 Severe Toxic	F1 Obscene	F1 Threat	F1 Insult	F1 Identity Hate
+1	0.013663	0.013261	0.608519	0.765670	0.972358	0.832700	0.000000	0.717300	0.698000	0.675400	0.727800
+2	0.012123	0.012483	0.628887	0.790840	0.975835	0.858600	0.040600	0.689600	0.706900	0.717700	0.759900
+3	0.010066	0.013020	0.662301	0.814126	0.976946	0.867800	0.059400	0.777300	0.738200	0.751700	0.779400
+Writing model shards: 100%
+ 1/1 [00:35<00:00, 35.52s/it]
+Writing model shards: 100%
+ 1/1 [00:35<00:00, 35.64s/it]
+Writing model shards: 100%
+ 1/1 [00:29<00:00, 29.52s/it]
+There were missing keys in the checkpoint model loaded: ['roberta.embeddings.LayerNorm.weight', 'roberta.embeddings.LayerNorm.bias', 'roberta.encoder.layer.0.attention.output.LayerNorm.weight', 'roberta.encoder.layer.0.attention.output.LayerNorm.bias', 'roberta.encoder.layer.0.output.LayerNorm.weight', 'roberta.encoder.layer.0.output.LayerNorm.bias', 'roberta.encoder.layer.1.attention.output.LayerNorm.weight', 'roberta.encoder.layer.1.attention.output.LayerNorm.bias', 'roberta.encoder.layer.1.output.LayerNorm.weight', 'roberta.encoder.layer.1.output.LayerNorm.bias', 'roberta.encoder.layer.2.attention.output.LayerNorm.weight', 'roberta.encoder.layer.2.attention.output.LayerNorm.bias', 'roberta.encoder.layer.2.output.LayerNorm.weight', 'roberta.encoder.layer.2.output.LayerNorm.bias', 'roberta.encoder.layer.3.attention.output.LayerNorm.weight', 'roberta.encoder.layer.3.attention.output.LayerNorm.bias', 'roberta.encoder.layer.3.output.LayerNorm.weight', 'roberta.encoder.layer.3.output.LayerNorm.bias', 'roberta.encoder.layer.4.attention.output.LayerNorm.weight', 'roberta.encoder.layer.4.attention.output.LayerNorm.bias', 'roberta.encoder.layer.4.output.LayerNorm.weight', 'roberta.encoder.layer.4.output.LayerNorm.bias', 'roberta.encoder.layer.5.attention.output.LayerNorm.weight', 'roberta.encoder.layer.5.attention.output.LayerNorm.bias', 'roberta.encoder.layer.5.output.LayerNorm.weight', 'roberta.encoder.layer.5.output.LayerNorm.bias', 'roberta.encoder.layer.6.attention.output.LayerNorm.weight', 'roberta.encoder.layer.6.attention.output.LayerNorm.bias', 'roberta.encoder.layer.6.output.LayerNorm.weight', 'roberta.encoder.layer.6.output.LayerNorm.bias', 'roberta.encoder.layer.7.attention.output.LayerNorm.weight', 'roberta.encoder.layer.7.attention.output.LayerNorm.bias', 'roberta.encoder.layer.7.output.LayerNorm.weight', 'roberta.encoder.layer.7.output.LayerNorm.bias', 'roberta.encoder.layer.8.attention.output.LayerNorm.weight', 'roberta.encoder.layer.8.attention.output.LayerNorm.bias', 'roberta.encoder.layer.8.output.LayerNorm.weight', 'roberta.encoder.layer.8.output.LayerNorm.bias', 'roberta.encoder.layer.9.attention.output.LayerNorm.weight', 'roberta.encoder.layer.9.attention.output.LayerNorm.bias', 'roberta.encoder.layer.9.output.LayerNorm.weight', 'roberta.encoder.layer.9.output.LayerNorm.bias', 'roberta.encoder.layer.10.attention.output.LayerNorm.weight', 'roberta.encoder.layer.10.attention.output.LayerNorm.bias', 'roberta.encoder.layer.10.output.LayerNorm.weight', 'roberta.encoder.layer.10.output.LayerNorm.bias', 'roberta.encoder.layer.11.attention.output.LayerNorm.weight', 'roberta.encoder.layer.11.attention.output.LayerNorm.bias', 'roberta.encoder.layer.11.output.LayerNorm.weight', 'roberta.encoder.layer.11.output.LayerNorm.bias'].
+There were unexpected keys in the checkpoint model loaded: ['roberta.embeddings.LayerNorm.beta', 'roberta.embeddings.LayerNorm.gamma', 'roberta.encoder.layer.0.attention.output.LayerNorm.beta', 'roberta.encoder.layer.0.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.0.output.LayerNorm.beta', 'roberta.encoder.layer.0.output.LayerNorm.gamma', 'roberta.encoder.layer.1.attention.output.LayerNorm.beta', 'roberta.encoder.layer.1.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.1.output.LayerNorm.beta', 'roberta.encoder.layer.1.output.LayerNorm.gamma', 'roberta.encoder.layer.2.attention.output.LayerNorm.beta', 'roberta.encoder.layer.2.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.2.output.LayerNorm.beta', 'roberta.encoder.layer.2.output.LayerNorm.gamma', 'roberta.encoder.layer.3.attention.output.LayerNorm.beta', 'roberta.encoder.layer.3.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.3.output.LayerNorm.beta', 'roberta.encoder.layer.3.output.LayerNorm.gamma', 'roberta.encoder.layer.4.attention.output.LayerNorm.beta', 'roberta.encoder.layer.4.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.4.output.LayerNorm.beta', 'roberta.encoder.layer.4.output.LayerNorm.gamma', 'roberta.encoder.layer.5.attention.output.LayerNorm.beta', 'roberta.encoder.layer.5.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.5.output.LayerNorm.beta', 'roberta.encoder.layer.5.output.LayerNorm.gamma', 'roberta.encoder.layer.6.attention.output.LayerNorm.beta', 'roberta.encoder.layer.6.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.6.output.LayerNorm.beta', 'roberta.encoder.layer.6.output.LayerNorm.gamma', 'roberta.encoder.layer.7.attention.output.LayerNorm.beta', 'roberta.encoder.layer.7.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.7.output.LayerNorm.beta', 'roberta.encoder.layer.7.output.LayerNorm.gamma', 'roberta.encoder.layer.8.attention.output.LayerNorm.beta', 'roberta.encoder.layer.8.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.8.output.LayerNorm.beta', 'roberta.encoder.layer.8.output.LayerNorm.gamma', 'roberta.encoder.layer.9.attention.output.LayerNorm.beta', 'roberta.encoder.layer.9.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.9.output.LayerNorm.beta', 'roberta.encoder.layer.9.output.LayerNorm.gamma', 'roberta.encoder.layer.10.attention.output.LayerNorm.beta', 'roberta.encoder.layer.10.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.10.output.LayerNorm.beta', 'roberta.encoder.layer.10.output.LayerNorm.gamma', 'roberta.encoder.layer.11.attention.output.LayerNorm.beta', 'roberta.encoder.layer.11.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.11.output.LayerNorm.beta', 'roberta.encoder.layer.11.output.LayerNorm.gamma'].
+
+✅ V5.2 Eğitimi Tamamlandı!
+
+---------------------------
+
+Etiket              Opt.Thr   F1@0.5   F1@opt   V5 Ref
+--------------------------------------------------------
+  toxic                  0.40   0.8678   0.8877   ↓0.048
+  severe_toxic           0.30   0.0594   0.4303   ↓0.070
+  obscene                0.40   0.7773   0.8249   ↓0.086
+  threat                 0.45   0.7382   0.7489   ↑0.576
+  insult                 0.40   0.7517   0.7824   ↓0.018
+  identity_hate          0.40   0.7794   0.8129   ↓0.048
+--------------------------------------------------------
+
+-----------------
+
+📊 FINAL SONUÇLAR — V5.2 vs V5 Karşılaştırması
+==========================================================
+  Metrik                               V5     V5.2     Fark
+----------------------------------------------------------
+  F1-macro (default t=0.5)         0.6653   0.6623  -0.0030
+  F1-macro (optimize thresh.)      0.6967   0.7478  +0.0511
+  ROC-AUC                          0.9818   0.9769  -0.0049
+==========================================================
+
+🏆 HEDEF AŞILDI! F1-macro ≥ 0.720 → 0.7478
+
+----------------------
+
+🧪 SARKAZM TESTLERİ — V5.2 vs V5
+======================================================================
+
+  ✅ 🔴 Oh great idea, killing people is a perfect solution!
+       Beklenen: 🔴 Toksik             V5 ref: V5: 0.811 ✅
+       V5.2: toxic(0.82), threat(0.54) (toxic=0.818)
+
+  ❌ 🔴 You're absolutely killing it, congrats!
+       Beklenen: 🟢 Güvenli            V5 ref: V5: 0.533 ❌
+       V5.2: toxic(0.67), threat(0.49) (toxic=0.671)
+
+  ❌ 🔴 Wow, what a brilliant move genius 🙄
+       Beklenen: 🟡 Sarkastik          V5 ref: V5: 0.386 ✅
+       V5.2: toxic(0.50), insult(0.44) (toxic=0.505)
+
+  ✅ 🔴 I hate you so much!
+       Beklenen: 🔴 Toksik             V5 ref: V5: 0.807 ✅
+       V5.2: toxic(0.58) (toxic=0.582)
+
+  ✅ 🟢 This is the best movie I've ever seen!
+       Beklenen: 🟢 Güvenli            V5 ref: V5: 0.534 ❌
+       V5.2: TEMİZ (toxic=0.320)
+
+  ✅ 🔴 Oh harika fikir, insanları öldürmek tam çözüm
+       Beklenen: 🔴 Toksik TR          V5 ref: V5: 0.074 ❌
+       V5.2: toxic(0.46) (toxic=0.456)
+
+  ✅ 🟢 Çok iyi iş çıkardın, bravo!
+       Beklenen: 🟢 Güvenli            V5 ref: V5: 0.004 ✅
+       V5.2: TEMİZ (toxic=0.071)
+
+  ✅ 🟢 Tabii ya, sen her şeyi biliyorsun değil mi 😒
+       Beklenen: 🟡 Sarkastik          V5 ref: V5: 0.372 ✅
+       V5.2: TEMİZ (toxic=0.061)
+
+  ✅ 🔴 Go kill yourself, nobody likes you
+       Beklenen: 🔴 Tehdit             V5 ref: V5: 0.920 ✅
+       V5.2: toxic(0.83), threat(0.55) (toxic=0.828)
+
+  ✅ 🟢 That presentation was... interesting.
+       Beklenen: 🟡 Pasif-Agr          V5 ref: V5: 0.011 ✅
+       V5.2: TEMİZ (toxic=0.356)
+
+======================================================================
+Doğru tahmin: 8/10 (80%)
+
+------------------------
+
+
+Writing model shards: 100%
+ 1/1 [00:19<00:00, 19.95s/it]
+🎉 V5.2 kaydedildi!
+   Model: /content/drive/MyDrive/ToxicGuard/models/toxicguard_v5_2_focal
+
+📊 Final F1-macro: 0.7478  |  ROC-AUC: 0.9769
+       Versiyon F1-macro ROC-AUC  Loss Epoch
+     V1 XGBoost    0.599   0.967     —     —
+         V2 SVM    0.599   0.967     —     —
+  V3 DistilBERT    0.693   0.978   BCE     3
+ V4 XLM-RoBERTa        —       —   BCE     2
+ V5 XLM-RoBERTa   0.6967  0.9818   BCE     2
+V5.2 (Bu model)   0.7478  0.9769 Focal     3

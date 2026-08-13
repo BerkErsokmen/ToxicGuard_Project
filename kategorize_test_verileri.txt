@@ -1,0 +1,104 @@
+=== 1. TEMİZ CÜMLELER (CLEAN) ===
+Beklenen Sonuç: Tüm toksisite etiketleri "0" olmalı.
+
+The weather is really nice today, I think I'll go for a walk.
+
+Thank you for the detailed article, it really helped me understand the topic better.
+
+Could you please clarify what you mean in the third paragraph?
+
+I respectfully disagree with your point of view, but I can see why you might think that way.
+
+This is a very interesting perspective on the history of Rome.
+
+Please do not edit this page without discussing it on the talk page first.
+
+Have a great weekend, looking forward to our next meeting.
+
+
+=== 2. DİKKAT EDİLMESİ GEREKEN CÜMLELER (TRICKY / EDGE CASES) ===
+Beklenen Sonuç: Aslında temiz cümleler olduğu için tüm etiketler "0" olmalı. (Ancak içinde "kill, bomb, shoot, terror, crazy" gibi kelimeler geçtiği için modelin kafası karışabilir. Modelin başarısını ölçmek için harikadır.)
+
+The boxer killed it in the ring tonight, what an amazing performance!
+
+This new cake recipe is an absolute bomb, you have to try it!
+
+I am going to shoot some hoops after work with my friends.
+
+My cat is such a little terror when she doesn't get her food on time.
+
+Stop being silly and just eat your vegetables.
+
+You guys are crazy if you think I am going to miss this rock concert!
+
+The developer executed the code flawlessly on the server.
+
+The documentary talks about the history of the black holes in our galaxy.
+
+
+=== 3. TOKSİK, MÜSTEHCEN VE HAKARET (TOXIC & OBSCENE & INSULT) ===
+Beklenen Sonuç: Toxic: 1, Obscene: 1, Insult: 1
+
+You are a complete idiot, shut your mouth and never speak again.
+
+Wow, you are so stupid that it physically hurts me to read your comments.
+
+Nobody cares about your pathetic opinion, loser.
+
+You are such a hypocrite clown.
+
+Go f**k yourself, you absolute piece of s**t.
+
+Motherf****r, I can't believe how dumb your entire existence is.
+
+Kiss my a$$, you annoying b**ch.
+
+Shut the hell up before I block your stupid account.
+
+
+=== 4. AŞIRI TOKSİK (SEVERE TOXIC) ===
+Beklenen Sonuç: Severe_Toxic: 1 (Genellikle beraberinde Toxic, Obscene ve Insult etiketlerini de tetikler)
+
+I hope you die a slow and painful death you disgusting piece of trash.
+
+F*** you and your whole f***ing family, rot in hell.
+
+You are a f***ing cancer on this earth, go kill yourself.
+
+Suck my d*** you worthless piece of garbage, I hope you burn.
+
+I will f***ing destroy your life you miserable little c***.
+
+
+=== 5. TEHDİT (THREAT) ===
+Beklenen Sonuç: Threat: 1 (Beraberinde Toxic etiketi de almalı)
+
+I know where you live and I am going to come to your house and kill you tonight.
+
+I will slit your throat if you ever post something like this again.
+
+Somebody should shoot you in the head to make the world a better place.
+
+I am going to find you and break your legs.
+
+Watch your back, I'm coming for you and your family.
+
+I will burn your house down while you sleep.
+
+
+=== 6. KİMLİK BAZLI NEFRET SÖYLEMİ (IDENTITY HATE) ===
+Beklenen Sonuç: Identity_Hate: 1 (Beraberinde Toxic etiketi de almalı)
+
+All gay people should just be sent to prison, they are disgusting.
+
+Black people are the reason this country is failing, pack your bags and leave.
+
+Muslims are all terrorists and should be banned from entering.
+
+Women are too emotional to hold any leadership positions in the government.
+
+Jews control everything and are destroying our economy.
+
+These immigrants are bringing crime and diseases into our pure nation.
+
+White people are the worst thing to ever happen to this planet.

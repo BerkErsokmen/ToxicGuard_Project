@@ -1,0 +1,179 @@
+İngilizce Sarkastik ve Toksik Veri Setleri
+SARC (Self-Annotated Reddit Corpus): Sarkazm tespiti için internetteki en büyük ve en popüler veri setlerinden biridir. Reddit kullanıcılarının sarkastik yorumlarını belirtmek için kullandıkları "/s" takısı baz alınarak oluşturulmuştur.
+
+SemEval-2018 Task 3 (Irony Detection in English Tweets): Twitter üzerindeki ironi ve kinayeyi tespit etmeye yönelik, akademik olarak etiketlenmiş çok kaliteli bir veri setidir. Toksisitenin alt dallarını yakalamak için idealdir.
+
+Jigsaw Unintended Bias in Toxicity Classification (Kaggle): Jigsaw'ın bu popüler veri seti, yalnızca toksik yorumları değil, aynı zamanda bağlama göre değişen örtük toksisiteyi ve alaycı ifadeleri analiz etmek için oldukça kapsamlıdır.
+
+iSarcasm: Sadece sarkazm içeren ifadeleri değil, aynı zamanda o ifadenin sarkastik olmayan, doğrudan söylenmiş versiyonlarını da barındıran oldukça yenilikçi bir veri setidir.
+
+
+Türkçe Sarkastik ve Toksik Veri Setleri
+Türkçe için doğrudan "sarcasm" etiketli büyük veri setleri daha az olsa da, şu kaynaklar çok işine yarayacaktır:
+
+Offenseval-TR (Turkish Offensive Language Detection): Bu veri seti doğrudan küfür barındırmayan ancak örtük, iğneleyici ve kinayeli bir dille yazılmış saldırgan tweetleri de içerir. Modelinin Türkçe toksisite sınırlarını anlaması için çok değerlidir.
+
+Ekşi Sözlük Sentiment/Toxicity Veri Setleri (Kaggle): Platformun doğası gereği, Ekşi Sözlük girdileri inanılmaz derecede yüksek oranda ironi, kinaye ve sarkastik toksisite içerir. Kaggle'da "Ekşi Sözlük" kelimeleriyle aratıp bulacağın duygu analizi veri setlerindeki negatif/toksik etiketleri kendi projene entegre edebilirsin.
+
+TSAD (Turkish Sarcasm Analysis Dataset): Akademik çalışmalar için Twitter üzerinden derlenmiş, spesifik olarak Türkçedeki kinayeli cümle yapılarını barındıran veri setlerindendir.
+
+
+ben veri sssetini genişletip daha iyi ssonuçlar vermessini isstiyorum projenin. bu projeyi nassıl geliştirebilirim ve daha iyi yapabilirim. unutma veri eğitimlerini google colab üzerinden eğitiyorum 
+
+
+
+İngilizce Sarkastik ve Toksik Veri Setleri
+SARC (Self-Annotated Reddit Corpus): Sarkazm tespiti için internetteki en büyük ve en popüler veri setlerinden biridir. Reddit kullanıcılarının sarkastik yorumlarını belirtmek için kullandıkları "/s" takısı baz alınarak oluşturulmuştur.
+
+SemEval-2018 Task 3 (Irony Detection in English Tweets): Twitter üzerindeki ironi ve kinayeyi tespit etmeye yönelik, akademik olarak etiketlenmiş çok kaliteli bir veri setidir. Toksisitenin alt dallarını yakalamak için idealdir.
+
+Jigsaw Unintended Bias in Toxicity Classification (Kaggle): Jigsaw'ın bu popüler veri seti, yalnızca toksik yorumları değil, aynı zamanda bağlama göre değişen örtük toksisiteyi ve alaycı ifadeleri analiz etmek için oldukça kapsamlıdır.
+
+iSarcasm: Sadece sarkazm içeren ifadeleri değil, aynı zamanda o ifadenin sarkastik olmayan, doğrudan söylenmiş versiyonlarını da barındıran oldukça yenilikçi bir veri setidir.
+
+
+Türkçe Sarkastik ve Toksik Veri Setleri
+Türkçe için doğrudan "sarcasm" etiketli büyük veri setleri daha az olsa da, şu kaynaklar çok işine yarayacaktır:
+
+Offenseval-TR (Turkish Offensive Language Detection): Bu veri seti doğrudan küfür barındırmayan ancak örtük, iğneleyici ve kinayeli bir dille yazılmış saldırgan tweetleri de içerir. Modelinin Türkçe toksisite sınırlarını anlaması için çok değerlidir.
+
+Ekşi Sözlük Sentiment/Toxicity Veri Setleri (Kaggle): Platformun doğası gereği, Ekşi Sözlük girdileri inanılmaz derecede yüksek oranda ironi, kinaye ve sarkastik toksisite içerir. Kaggle'da "Ekşi Sözlük" kelimeleriyle aratıp bulacağın duygu analizi veri setlerindeki negatif/toksik etiketleri kendi projene entegre edebilirsin.
+
+TSAD (Turkish Sarcasm Analysis Dataset): Akademik çalışmalar için Twitter üzerinden derlenmiş, spesifik olarak Türkçedeki kinayeli cümle yapılarını barındıran veri setlerindendir.
+
+
+ben veri sssetini genişletip daha iyi ssonuçlar vermessini isstiyorum projenin. bu projeyi nassıl geliştirebilirim ve daha iyi yapabilirim. unutma veri eğitimlerini google colab üzerinden eğitiyorum 
+
+"Öncelikle "Günceller mi?" sorunu cevaplayayım: Bir önceki mesajda saydığım SARC, SemEval ve Offenseval-TR gibi veri setleri akademik camiada "altın standart" olarak kabul edilen, genelde 2018-2021 yılları arasında oluşturulmuş veri setleri. BERT gibi modellerin temel sarkazm ve toksisite mantığını öğrenmesi için hala çok iyiler.
+
+
+Daha Güncel İngilizce Veri Setleri
+ToxiGen (2022+): Bu veri seti harikadır çünkü doğrudan büyük dil modelleri (AI) kullanılarak üretilmiştir. İçerisinde insanları kandırabilecek seviyede örtük (implicit) toksik ve zararsız cümleler bulunur. İnce alayları ve dolaylı hakaretleri tespit etmek için en güncel kaynaklardan biridir.
+
+HateCheck: Modelin toksisiteyi gerçekten anlayıp anlamadığını, yoksa sadece belli "kötü kelimeleri" mi ezberlediğini test etmek için çok güncel bir veri seti. İçinde hiç küfür olmayan ama zehir zemberek olan cümleler ile küfür barındıran ama aslında arkadaşça söylenen (örn: "You sick bastard, that was awesome!") zorlayıcı örnekler var.
+
+DynaHate / Dynabench: Bu sistem sürekli güncellenir. İnsanların bilerek AI modellerini kandırmaya çalıştığı, kelime oyunları ve kinaye içeren "adversarial" (çekişmeli) cümlelerden oluşur.
+
+Daha Güncel Türkçe Veri Setleri
+Türkçe için "hazır ve çok güncel" sarkazm veri seti bulmak her zaman biraz daha zorlayıcıdır. Ancak şu yolları izleyebilirsin:
+
+Hugging Face (turkish-nlp): Kaggle'ın yanı sıra veri seti aramak için asıl adresin Hugging Face olmalı. Arama kısmına "turkish offensive", "turkish sentiment" veya "sarcasm" yazdığında, topluluk tarafından sürekli yüklenen daha yeni (2023-2025) repo'lar bulabilirsin.
+
+Kemik NLP (Yıldız Teknik Üni.): Doğrudan sarkazm etiketli olmasa da, doğal dil işleme için Türkçe metinlerin derlendiği ve temizlendiği, akademik olarak geçerliliği olan veri setleri yayınlarlar. Ara ara güncel veri setleri eklenir."
+
+şimdi ben etiektleri zaten hazıramıştım ya tekrar mı eğitmem gereicek eskileri de onu tam anlamadım. yeni etiket eklemenin dezavantajı var mı? 
+
+data sseterini manuel de indiririm ondan yana sıkkıntı yok. proje tutarlı çalışssın issstiyorum
+
+
+
+
+Implementation Plan
+
+
+🛡️ ToxicGuard V5 — Genişletilmiş Veri Seti & Sarkazm Desteği
+Amaç
+Mevcut V4 modelinin (XLM-RoBERTa, EN+TR karma) zayıf kaldığı noktalara — sarkazm/ironi, örtük toksisite ve Türkçe yetersizliği — yeni veri setleri ekleyerek doğrudan saldırılarda zaten iyi olan modeli bağlamsal/kinayeli toksisitede de güçlendirmek.
+
+Eğitim ortamı: Google Colab (T4 GPU, ücretsiz tier)
+
+Mevcut Durum (Başlangıç Noktası)
+Versiyon	F1-macro	ROC-AUC	Veri
+V1 XGBoost	0.599	0.967	Kaggle EN
+V2 SVM opt.	0.599	0.967	Kaggle EN
+V3 DistilBERT	0.693	0.978	Kaggle EN dengeli
+V4 XLM-RoBERTa	—	—	Kaggle EN + Overfit-GM TR
+V4'ün bilinen açığı: Sarkazm/ironi içeren yorumları kaçırıyor. Örnek: "Oh harika fikir, insanları öldürmek tam çözüm" → model "güvenli" diyebilir.
+
+User Review Required
+IMPORTANT
+
+Kaggle API Key Gereksinimi: Jigsaw Unintended Bias veri seti (~2M satır) için kaggle.json kimlik bilgisi gerekiyor. Kaggle profil sayfasından indirip Colab'a yüklemen gerekecek.
+
+WARNING
+
+Colab Ücretsiz Tier Sınırı: Tüm veri setlerini aynı anda kullanmak ~8-12 saat eğitim anlamına gelebilir. Önce "Hızlı Prototip" seçeneğini (alt küme) önereceğim, sonra tam eğitimi.
+
+IMPORTANT
+
+SemEval-2018 ve iSarcasm: Bu veri setlerini projene doğrudan yeni bir etiket (sarcasm=1) olarak ekleyip 6 → 7 etiketli sisteme geçmek ister misin? Yoksa mevcut 6 etiket sistemine insult/toxic olarak mı eşleştireceğiz? Bu kararın verilmesi lazım. (Öneri: Aşağıda V5-A ve V5-B seçenekleri.)
+
+Open Questions
+IMPORTANT
+
+Mimari seçim: İki yol var:
+
+V5-A (Kolay): Yeni veri setlerini mevcut 6 etikete mapliyoruz, aynı XLM-RoBERTa mimarisi.
+V5-B (Güçlü ama karmaşık): 7. etiket olarak sarcasm ekliyoruz, mimariyi genişletiyoruz. Hangisini tercih edersin?
+Önerilen Geliştirme Planı
+📊 Eklenmesi Planlanan Veri Setleri (Öncelik Sırasına Göre)
+🥇 Öncelik 1 — Jigsaw Unintended Bias (EN, Kaggle)
+Kaynak: kaggle competitions download -c jigsaw-unintended-bias-in-toxicity-classification
+Boyut: ~1.8M yorum
+Neden önemli? Örtük toksisite + sarkastik toksisiteyi içeriyor. Kaggle'ın Jigsaw'ının devamı niteliğinde.
+Etiket map: toxicity ≥ 0.5 → toxic=1, diğer etiketler benzer threshold ile
+Colab etkisi: Altküme alınacak (~50K yorum), drive alanı ~300MB ek
+🥇 Öncelik 1 — OffensEval-TR (TR, HuggingFace)
+Kaynak: load_dataset("offenseval2020_tr") — doğrudan HuggingFace'ten
+Boyut: ~32K tweet
+Neden önemli? Türkçe örtük saldırganlık, kinaye ve iğneleyici dili içeriyor
+Etiket map: offensive=1 → toxic=1, targeted=1 → insult=1
+Colab etkisi: Minimal, otomatik indir
+🥈 Öncelik 2 — SemEval-2018 Task 3 (EN, İrony)
+Kaynak: GitHub'dan direkt indirme (wget ile Colab'a çekme)
+Boyut: ~3K tweet (küçük ama kaliteli)
+Neden önemli? Akademik etiket kalitesi çok yüksek, ironi tespiti için ideal
+Etiket map:
+V5-A: irony=1 → toxic=1 + is_sarcastic=1 → insult=1 (gergin ama çalışır)
+V5-B: Yeni sarcasm=1 etiketi olarak eklenir
+Colab etkisi: Neredeyse yok (<5MB)
+🥈 Öncelik 2 — SARC Reddit Corpus (EN, Sarkazm)
+Kaynak: HuggingFace load_dataset("sarc") - train split'i
+Boyut: 1M+ yorum (altküme alınacak, ~30K)
+Neden önemli? En büyük İngilizce sarkazm korpusu, V5'in güçlü silahı
+Etiket map: label=1 → sarcasm/toxic (negatif sarkazm için)
+Colab etkisi: Örnekleme yapılacak, ~200MB
+🥉 Öncelik 3 — Ekşi Sözlük / TSAD (TR)
+Kaynak: Kaggle'da "Ekşi toksik" veya TSAD araması → manuel yükleme
+Not: Bu veri setleri otomatik indirilemiyor, manuel drive'a upload gerekiyor
+Colab etkisi: Drive'a önceden yüklenmiş olması şart
+Geliştirme Adımları (V5 Notebook)
+BÖLÜM 1 — Kurulum (Değişiklik Yok)
+Mevcut V4 kurulum hücreleri korunacak.
+
+BÖLÜM 2 — Genişletilmiş Veri Seti (YENİ)
+
+Kaggle Jigsaw (orijinal) → df_en      ~45K (mevcut)
+Jigsaw Unintended Bias   → df_jigsaw  ~50K (YENİ - altküme)
+SemEval-2018 Irony       → df_semeval ~3K  (YENİ - tamamı)
+SARC Reddit              → df_sarc    ~30K (YENİ - altküme)
+Overfit-GM Turkish       → df_tr      ~5K  (mevcut)
+OffensEval-TR            → df_off_tr  ~32K (YENİ)
+─────────────────────────────────────────────
+TOPLAM KARMA VERİ SETİ:               ~165K
+BÖLÜM 3 — Etiket Birleştirme Stratejisi (KRİTİK)
+V5-A yolunda (6 etiket korunur):
+
+Yeni Veri Seti	Nasıl Maplanacak
+Jigsaw Bias toxicity≥0.5	toxic=1
+Jigsaw Bias severe_toxicity≥0.5	severe_toxic=1
+SemEval irony (olumsuz)	insult=1, toxic=1
+SARC negatif sarkazm	toxic=1
+OffensEval-TR offensive	toxic=1
+OffensEval-TR targeted	insult=1
+BÖLÜM 4 — Model: XLM-RoBERTa-large (Yükseltme)
+Mevcut V4: xlm-roberta-base (270M parametre)
+Önerilen V5: xlm-roberta-base korunur (Colab ücretsiz sınırı için)
+Eğitim süresi tahmini: ~25-35 dk (T4 GPU, 2 epoch, 165K veri)
+BÖLÜM 5 — Threshold Optimizasyonu (YENİ)
+V4'te sabit 0.5 threshold kullanılıyordu
+V5'te validation üzerinde etiket bazlı optimize edilmiş threshold
+Sarkazm kaynaklı gürültüyü dengelemek için önemli
+Verification Plan
+Otomatik Test
+Mevcut test_verileri.txt ve kategorize_test_verileri.txt dosyaları üzerinde V5 vs V4 karşılaştırması
+F1-macro hedef: 0.720+ (V3'ün 0.693'ünü geçmek)
+Sarkazm kategorisi için ayrı test: "You're killing it!" → Güvenli ✅ olmalı
+Manuel Doğrulama
+analiz_sonuçları/ klasörüne V5 CSV çıktısı eklenecek
+görsselestir.py betiği güncellenerek V5 sütunu karşılaştırma tablosuna eklenecek

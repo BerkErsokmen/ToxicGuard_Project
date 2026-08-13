@@ -1,0 +1,60 @@
+--- V3
++++ Kopya
+@@ -1,7 +1,7 @@
+ # 🚀 ToxicGuard V3 — Transformer (Deep Learning) Notebook
+ 
+ Bu versiyonda klasik Makine Öğrenmesi (TF-IDF + Logistic Regression) altyapısını geride bırakıp,
+-**Bağlamı (Context), ironiyi ve üstü kapalı tehditleri ('boğaz keseceğim' vb.) anlayabilen devasa dil modelleri (LLM - Transformer)** olan 
++**Bağlamı (Context), ironiyi ve üstü kapalı tehditleri ('boğaz keseceğim' vb.) anlayabilen devasa dil modelleri (LLM - Transformer)** olan
+ `DistilBERT` / `RoBERTa` mimarisini eğiteceğiz.
+ 
+ ---
+@@ -37,9 +37,9 @@
+ import torch
+ from datasets import Dataset
+ from transformers import (
+-    AutoTokenizer, 
+-    AutoModelForSequenceClassification, 
+-    TrainingArguments, 
++    AutoTokenizer,
++    AutoModelForSequenceClassification,
++    TrainingArguments,
+     Trainer,
+     EvalPrediction
+ )
+@@ -107,8 +107,8 @@
+ tokenized_dataset.set_format('torch', columns=['input_ids', 'attention_mask', 'labels']) # HÜCRE 7: Sınıflandırma Modelini Yükle (Multi-Label)
+ model = AutoModelForSequenceClassification.from_pretrained(
+-    MODEL_NAME, 
+-    num_labels=len(LABEL_COLS), 
++    MODEL_NAME,
++    num_labels=len(LABEL_COLS),
+     problem_type="multi_label_classification"
+ )
+ print("✅ Model başarıyla yüklendi.")@@ -122,16 +122,16 @@
+     probs = torch.sigmoid(torch.tensor(preds)).numpy()
+     y_pred = (probs > 0.5).astype(int)
+     y_true = p.label_ids
+-    
++
+     f1_macro = f1_score(y_true, y_pred, average='macro', zero_division=0)
+     roc_auc = roc_auc_score(y_true, probs, average='macro', multi_class='ovr')
+-    
++
+     return {'f1_macro': f1_macro, 'roc_auc': roc_auc}
+ 
+ # HÜCRE 9: Eğitim Konfigürasyonları
+ training_args = TrainingArguments(
+     output_dir=os.path.join(MODELS_DIR, 'distilbert_v3_checkpoints'),
+-    evaluation_strategy="epoch",
++    eval_strategy="epoch",
+     save_strategy="epoch",
+     learning_rate=2e-5,
+     per_device_train_batch_size=32,
+@@ -147,7 +147,6 @@
+     args=training_args,
+     train_dataset=tokenized_dataset['train'],
+     eval_dataset=tokenized_dataset['test'],
+-    tokenizer=tokenizer,
+     compute_metrics=compute_metrics
+ ) # HÜCRE 10: Eğitimi Başlat!

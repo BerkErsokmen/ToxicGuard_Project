@@ -1,0 +1,32 @@
+ABSTRACT (min 1000 characters)
+
+1.
+INTRODUCTION (min 5000 characters)
+
+2.
+REALISTIC CONSTRAINTS AND CONDITIONS
+
+2.1.
+Sustainable Development Goal (min 1000 characters)
+Discuss the relationship between your project topic and the sustainable development goal you chose in section 13.
+
+2.2.
+Effects on Health, Environment and the Problems of the Age Reflected in the Field of Engineering (min 1000 characters)
+Discuss the impact of your project on health, environment and safety in universal and social dimensions and the problems of the age reflected in the field of engineering.
+
+2.3.
+Legal Consequences (min 1000 characters)
+Discuss the legal consequences of your project.
+
+3.
+LITEARTURE ANALYSIS (min 8000 characters)
+Perform a literature analysis on your project topic to summarize the state-of-the-art in the field. Explain similar applications. Use proper in-text citations and list them in the references section.
+
+4.
+STANDARTS TO BE USED (min 1000 characters)
+Explain the engineering standards you plan to use in the development of your project.
+
+5.
+APPROACHES, TECHNIQUES, AND TECHNOLOGIES TO BE USED (min 6000 characters)
+
+12. References

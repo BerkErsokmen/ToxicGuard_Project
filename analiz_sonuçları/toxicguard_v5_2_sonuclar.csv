@@ -1,0 +1,58 @@
+﻿yorum,toksisite_skoru,seviye,Toksik,Ağır Toksik,Müstehcen,Tehdit,Hakaret,Kimlik Nefreti
+"The weather is really nice today, I think I'll go for a walk.",0.2328,Güvenli,0.2328,0.0168,0.0234,0.0164,0.2111,0.0275
+"Thank you for the detailed article, it really helped me understand the topic better.",0.2542,Güvenli,0.2542,0.0126,0.0188,0.0141,0.0781,0.0168
+"I respectfully disagree with your point of view, but I can see why you might think that way.",0.0494,Güvenli,0.0494,0.0206,0.023,0.0289,0.0254,0.0221
+This is a very interesting perspective on the history of Rome.,0.189,Güvenli,0.189,0.0154,0.0191,0.0202,0.0433,0.0278
+"Have a great weekend, looking forward to our next meeting.",0.2492,Güvenli,0.2492,0.0199,0.0239,0.0224,0.1438,0.0292
+"Bugün hava çok güzel, parkta yürüyüş yapmayı düşünüyorum.",0.0454,Güvenli,0.0454,0.0207,0.022,0.0244,0.043,0.0198
+"Makalenizi okudum, gerçekten aydınlatıcıydı, teşekkür ederim.",0.0538,Güvenli,0.0525,0.0173,0.0176,0.0193,0.0538,0.016
+Katılmıyorum ama görüşünüze saygı duyuyorum.,0.0456,Güvenli,0.0456,0.02,0.0195,0.0274,0.0394,0.0161
+Bu konu hakkında daha fazla bilgi edinmek istiyorum.,0.0401,Güvenli,0.0401,0.0208,0.0247,0.0246,0.0297,0.0215
+"Toplantıda görüşmek üzere, iyi çalışmalar.",0.0381,Güvenli,0.0381,0.0224,0.0205,0.0281,0.0362,0.0216
+"The boxer killed it in the ring tonight, what an amazing performance!",0.4649,Dikkat,0.4649,0.0465,0.0342,0.1627,0.0985,0.0392
+"This new cake recipe is an absolute bomb, you have to try it!",0.3637,Dikkat,0.3637,0.0449,0.0768,0.0638,0.1564,0.0277
+I am going to shoot some hoops after work with my friends.,0.4461,Dikkat,0.3944,0.0841,0.0506,0.4461,0.0631,0.0358
+You guys are crazy if you think I am going to miss this rock concert!,0.4324,Dikkat,0.4324,0.0368,0.0622,0.0447,0.1959,0.0597
+The developer executed the code flawlessly on the server.,0.3579,Dikkat,0.3579,0.0171,0.0271,0.0252,0.0559,0.0269
+"Oh wow, what a BRILLIANT idea, I'm sure that will definitely work out great.",0.7256,Toksik,0.7256,0.0179,0.0346,0.0282,0.0649,0.026
+"You're absolutely killing it lately, keep up the amazing work!",0.5891,Dikkat,0.5891,0.0924,0.0518,0.437,0.0836,0.0379
+"Sure, because you clearly know everything about everything, don't you?",0.6793,Toksik,0.6793,0.021,0.0314,0.04,0.044,0.0318
+"Oh great, another Monday. Just what I always wanted.",0.7843,Toksik,0.7843,0.0312,0.0304,0.0167,0.7593,0.03
+"Yeah right, like that's ever going to happen.",0.5732,Dikkat,0.5732,0.0206,0.0304,0.0347,0.0427,0.0316
+"Vay be, ne kadar zeki bir fikir bu, kesinlikle işe yarayacak!",0.1278,Güvenli,0.1278,0.0158,0.0157,0.0241,0.0615,0.0135
+"Tabii ya, sen her şeyi biliyorsun değil mi? 😒",0.0693,Güvenli,0.0644,0.0169,0.012,0.019,0.0693,0.0175
+"Evet evet, çok başarılı bir sunum oldu, herkesi büyüledik.",0.0501,Güvenli,0.0501,0.0178,0.0177,0.0217,0.0412,0.0172
+"Oh harika fikir, insanları öldürmek tam çözüm.",0.4582,Dikkat,0.4582,0.067,0.0186,0.3948,0.0821,0.0256
+"Bravo, bir kez daha hayal kırıklığı yarattın, aferin sana.",0.2297,Güvenli,0.2297,0.019,0.023,0.0187,0.2293,0.0197
+"You are a complete idiot, shut your mouth and never speak again.",0.9487,Toksik,0.9487,0.0892,0.2651,0.0589,0.8137,0.0414
+"Nobody cares about your pathetic opinion, loser.",0.7983,Toksik,0.7983,0.0455,0.0686,0.0307,0.6994,0.0383
+"Go f**k yourself, you absolute piece of garbage.",0.9184,Toksik,0.9184,0.2949,0.6891,0.0686,0.8049,0.0794
+Shut the hell up before I block your stupid account.,0.8642,Toksik,0.8642,0.1499,0.5169,0.0833,0.604,0.0788
+"You are such a brainless moron, it's embarrassing.",0.8336,Toksik,0.8336,0.082,0.2021,0.0419,0.7421,0.0334
+"Sen tam bir aptalısın, bir daha konuşma.",0.7963,Toksik,0.7787,0.0261,0.0158,0.0203,0.7963,0.0162
+"Git buradan, kimse seni istemiyor zaten.",0.1248,Güvenli,0.1248,0.0146,0.0137,0.0172,0.1007,0.0224
+"Seni istemiyoruz, defol git.",0.8039,Toksik,0.7964,0.0275,0.0208,0.0222,0.8039,0.0165
+"Hiç böyle salak biri görmedim, utanmıyor musun?",0.5536,Dikkat,0.5448,0.0226,0.0152,0.0156,0.5536,0.0149
+Zavallı biri olduğunu söylesem yalan olmaz.,0.4028,Dikkat,0.4028,0.024,0.0187,0.0199,0.4009,0.0212
+"I hope you get what you deserve, you disgusting waste of space.",0.618,Toksik,0.618,0.0598,0.1086,0.0682,0.4476,0.0435
+F*** you and everything you stand for.,0.8043,Toksik,0.8043,0.3106,0.6966,0.0993,0.5823,0.0775
+"You are a cancer on this community, go kill yourself.",0.9244,Toksik,0.9244,0.1724,0.2091,0.6505,0.5268,0.0297
+I will f***ing destroy your pathetic life.,0.9092,Toksik,0.9092,0.306,0.6534,0.4498,0.5145,0.07
+Rot in hell you miserable piece of trash.,0.8634,Toksik,0.8634,0.2597,0.5955,0.0654,0.7664,0.1153
+I know where you live and I am going to make you pay for this.,0.3634,Dikkat,0.3634,0.06,0.0654,0.1933,0.059,0.0485
+I will slit your throat if you ever post something like this again.,0.804,Toksik,0.804,0.1535,0.1119,0.6811,0.1443,0.0434
+"Watch your back, I'm coming for you.",0.2873,Güvenli,0.2873,0.0459,0.0364,0.1369,0.0882,0.0383
+"You better run because when I find you, it won't be pretty.",0.3892,Dikkat,0.3892,0.067,0.0586,0.149,0.173,0.1044
+I will burn everything you love to the ground.,0.727,Toksik,0.727,0.1361,0.0662,0.6734,0.0654,0.048
+Seni bulacağım ve pişman edeceğim.,0.1077,Güvenli,0.1077,0.0177,0.0184,0.0277,0.0936,0.0141
+"Dur bakalım, bir daha karşıma çıkma.",0.0866,Güvenli,0.0866,0.0164,0.0171,0.0244,0.0681,0.017
+Seninle bu işin hesabını soracağım.,0.133,Güvenli,0.133,0.0161,0.0228,0.017,0.1264,0.0183
+"All gay people should be sent to prison, they are disgusting freaks.",0.9592,Toksik,0.9592,0.1709,0.2223,0.146,0.8324,0.6592
+Black people are the reason this country is failing.,0.8116,Toksik,0.8116,0.0478,0.0304,0.0348,0.2887,0.7425
+Muslims are all terrorists and should be deported immediately.,0.9451,Toksik,0.9451,0.1411,0.0559,0.2055,0.5021,0.812
+Women are too emotional and weak for any leadership role.,0.8138,Toksik,0.8138,0.0536,0.0317,0.0276,0.6451,0.7373
+Jews control the media and are destroying our society.,0.8126,Toksik,0.8126,0.0907,0.0489,0.0839,0.3296,0.7769
+These immigrants are bringing crime and disease into our nation.,0.7171,Toksik,0.7171,0.0655,0.0362,0.0434,0.4887,0.6254
+"Eşcinseller bu ülkede yaşamamalı, iğrenç bir sapıklık.",0.7948,Toksik,0.7787,0.0246,0.0137,0.0165,0.7948,0.0261
+"Kürtler buradan gitmeli, bu topraklar bizim.",0.2698,Güvenli,0.2698,0.0169,0.0128,0.0159,0.2692,0.0422
+"Yabancılar ülkemizi mahvediyor, hepsini geri gönderin.",0.3686,Dikkat,0.3648,0.0233,0.0137,0.024,0.3686,0.0424

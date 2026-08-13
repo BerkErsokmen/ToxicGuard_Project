@@ -1,0 +1,5 @@
+Model,F1 (micro),F1 (macro),ROC-AUC,Süre (s)
+Logistic Regression,0.6830,0.5643,0.9816,0.0
+Random Forest,0.5905,0.3803,0.9642,16.0
+Linear SVM,0.7038,0.5187,0.9731,0.1
+XGBoost,0.7085,0.5987,0.9669,0.3

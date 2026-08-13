@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToxicGuard V5.2 — Model Değerlendirme Raporu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --primary: #4f46e5;
+    --primary-light: #818cf8;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface2: #273548;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #1e3a5f 100%);
+    padding: 60px 40px 50px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(99,102,241,0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 50%, rgba(59,130,246,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.2);
+    border: 1px solid rgba(99,102,241,0.4);
+    color: var(--primary-light);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e0e7ff, #a5b4fc, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    text-align: center;
+  }
+  .hero-meta-item .val {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-light);
+  }
+  .hero-meta-item .lbl {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* CONTAINER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+  /* SECTION */
+  .section { margin-bottom: 50px; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e0e7ff;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    background: rgba(99,102,241,0.2);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--primary-light); }
+  .stat-card .stat-val {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .stat-card .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .color-green { color: #34d399; }
+  .color-yellow { color: #fbbf24; }
+  .color-red { color: #f87171; }
+  .color-blue { color: var(--primary-light); }
+
+  /* VERSION TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(99,102,241,0.05); }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-green { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+  .badge-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+  .badge-red { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+  .badge-blue { background: rgba(129,140,248,0.15); color: var(--primary-light); border: 1px solid rgba(129,140,248,0.3); }
+
+  /* PROGRESS BAR */
+  .progress-row { margin-bottom: 16px; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .progress-label .name { font-weight: 500; }
+  .progress-label .pct { color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+  .progress-bar {
+    height: 10px;
+    background: var(--surface2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.3s ease;
+  }
+  .fill-green { background: linear-gradient(90deg, #059669, #34d399); }
+  .fill-red { background: linear-gradient(90deg, #991b1b, #f87171); }
+  .fill-yellow { background: linear-gradient(90deg, #92400e, #fbbf24); }
+  .fill-blue { background: linear-gradient(90deg, #3730a3, #818cf8); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: rgba(99,102,241,0.08);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .highlight-box.success {
+    background: rgba(5,150,105,0.08);
+    border-color: rgba(5,150,105,0.3);
+    border-left-color: var(--success);
+  }
+  .highlight-box.warning {
+    background: rgba(217,119,6,0.08);
+    border-color: rgba(217,119,6,0.3);
+    border-left-color: var(--warning);
+  }
+  .highlight-box.danger {
+    background: rgba(220,38,38,0.08);
+    border-color: rgba(220,38,38,0.3);
+    border-left-color: var(--danger);
+  }
+  .highlight-box h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .highlight-box p, .highlight-box li { font-size: 13px; color: var(--text-muted); }
+  .highlight-box ul { padding-left: 16px; }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #c9d1d9;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  .code-block .comment { color: #8b949e; }
+  .code-block .string { color: #a5d6ff; }
+  .code-block .number { color: #79c0ff; }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; color: black; }
+    .hero { background: #4f46e5; }
+    .card, .stat-card { border: 1px solid #ccc; }
+    .code-block { background: #f5f5f5; color: black; }
+  }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* CATEGORY TAG */
+  .cat-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .score-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .score-mini {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    min-width: 40px;
+    color: var(--text-muted);
+  }
+  .score-mini-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  /* EXAMPLE ROWS */
+  .example-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .example-row .verdict {
+    flex-shrink: 0;
+    font-size: 18px;
+    margin-top: 2px;
+  }
+  .example-row .text { flex: 1; }
+  .example-row .meta { color: var(--text-muted); font-size: 12px; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Mezuniyet Projesi • Model Değerlendirme</div>
+  <h1>🛡️ ToxicGuard V5.2<br>Model Performans Raporu</h1>
+  <p>XLM-RoBERTa tabanlı çok dilli toksisite tespit modeli — Kapsamlı test analizi</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="val">V5.2</span>
+      <span class="lbl">Model Versiyonu</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="val">0.7478</span>
+      <span class="lbl">F1-Macro (opt.)</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="val">0.9769</span>
+      <span class="lbl">ROC-AUC</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="val">293K</span>
+      <span class="lbl">Eğitim Verisi</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="val">EN + TR</span>
+      <span class="lbl">Desteklenen Diller</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1. VERSİYON GEÇMİŞİ -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📈</div>
+      Versiyon Karşılaştırması
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Versiyon</th>
+            <th>Model</th>
+            <th>F1-Macro</th>
+            <th>ROC-AUC</th>
+            <th>Loss</th>
+            <th>Veri Boyutu</th>
+            <th>Dil Desteği</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>V1</td>
+            <td>XGBoost</td>
+            <td>0.599</td>
+            <td>0.967</td>
+            <td>—</td>
+            <td>~16K</td>
+            <td><span class="badge badge-yellow">EN</span></td>
+          </tr>
+          <tr>
+            <td>V2</td>
+            <td>SVM (opt.)</td>
+            <td>0.599</td>
+            <td>0.967</td>
+            <td>—</td>
+            <td>~16K</td>
+            <td><span class="badge badge-yellow">EN</span></td>
+          </tr>
+          <tr>
+            <td>V3</td>
+            <td>DistilBERT</td>
+            <td>0.693</td>
+            <td>0.978</td>
+            <td>BCE</td>
+            <td>~48K dengeli</td>
+            <td><span class="badge badge-yellow">EN</span></td>
+          </tr>
+          <tr>
+            <td>V4</td>
+            <td>XLM-RoBERTa-base</td>
+            <td>—</td>
+            <td>—</td>
+            <td>BCE</td>
+            <td>~50K</td>
+            <td><span class="badge badge-blue">EN + TR</span></td>
+          </tr>
+          <tr>
+            <td>V5</td>
+            <td>XLM-RoBERTa-base</td>
+            <td>0.6967</td>
+            <td>0.9818</td>
+            <td>BCE</td>
+            <td>~165K</td>
+            <td><span class="badge badge-blue">EN + TR + Sarkazm</span></td>
+          </tr>
+          <tr style="background: rgba(99,102,241,0.08);">
+            <td><strong>V5.2 ★</strong></td>
+            <td><strong>XLM-RoBERTa-base</strong></td>
+            <td><strong class="color-green">0.7478</strong></td>
+            <td><strong>0.9769</strong></td>
+            <td><strong>Focal Loss</strong></td>
+            <td><strong>~293K</strong></td>
+            <td><span class="badge badge-green">EN + TR + Sarkazm</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. EĞİTİM VERİ SETLERİ -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📦</div>
+      V5.2 Eğitim Veri Setleri (Toplam ~293K Satır)
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Veri Seti</th>
+            <th>Dil</th>
+            <th>Boyut</th>
+            <th>Kaynak</th>
+            <th>Katkı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kaggle Jigsaw Toxic Comment</td>
+            <td><span class="badge badge-yellow">EN</span></td>
+            <td>64,900</td>
+            <td>Kaggle (kaggle.com/c/jigsaw-toxic-comment...)</td>
+            <td>Temel toksisite</td>
+          </tr>
+          <tr>
+            <td>Jigsaw Unintended Bias</td>
+            <td><span class="badge badge-yellow">EN</span></td>
+            <td>52,584</td>
+            <td>Kaggle (jigsaw-unintended-bias...)</td>
+            <td>Örtük/bağlamsal toksisite</td>
+          </tr>
+          <tr>
+            <td>TweetEval Hate Speech <span class="badge badge-blue" style="font-size:10px">YENİ</span></td>
+            <td><span class="badge badge-yellow">EN</span></td>
+            <td>12,959</td>
+            <td>HuggingFace (tweet_eval)</td>
+            <td>Nefret söylemi, threat desteği</td>
+          </tr>
+          <tr>
+            <td>SemEval-2018 Task 3 (Irony)</td>
+            <td><span class="badge badge-yellow">EN</span></td>
+            <td>3,833</td>
+            <td>GitHub (Cyvhee/SemEval2018-Task3)</td>
+            <td>İroni / sarkazm</td>
+          </tr>
+          <tr>
+            <td>SARC Reddit Corpus</td>
+            <td><span class="badge badge-yellow">EN</span></td>
+            <td>28,301</td>
+            <td>Kaggle (danofer/sarcasm)</td>
+            <td>Sarkazm</td>
+          </tr>
+          <tr>
+            <td>Overfit-GM Turkish Toxic</td>
+            <td><span class="badge badge-blue">TR</span></td>
+            <td>77,782</td>
+            <td>HuggingFace (Overfit-GM/turkish-toxic-language)</td>
+            <td>Türkçe toksisite</td>
+          </tr>
+          <tr>
+            <td>Toygar TR Offensive <span class="badge badge-blue" style="font-size:10px">YENİ</span></td>
+            <td><span class="badge badge-blue">TR</span></td>
+            <td>53,005</td>
+            <td>HuggingFace (Toygar/turkish-offensive-language...)</td>
+            <td>Türkçe hakaret & saldırganlık</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. V5.2 ETİKET BAZLI SONUÇLAR -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🎯</div>
+      Eğitim Sonu Etiket Bazlı Performans (Optimize Threshold'la)
+    </div>
+    <div class="card">
+      <p style="font-size:13px; color: var(--text-muted); margin-bottom: 16px;">
+        V5.2, her etiket için ayrı optimal karar eşiği (threshold) kullanmaktadır. Bu yaklaşım genel F1-macro'yu <strong>0.6623 → 0.7478'e</strong> yükseltti.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Etiket</th>
+            <th>Opt. Threshold</th>
+            <th>F1 @ 0.5</th>
+            <th>F1 @ Opt.</th>
+            <th>İyileşme</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>toxic</td>
+            <td>0.40</td>
+            <td>0.8678</td>
+            <td class="color-green"><strong>0.8877</strong></td>
+            <td class="color-green">+0.020</td>
+          </tr>
+          <tr>
+            <td>severe_toxic</td>
+            <td>0.30</td>
+            <td>0.0594</td>
+            <td class="color-green"><strong>0.4303</strong></td>
+            <td class="color-green">+0.371</td>
+          </tr>
+          <tr>
+            <td>obscene</td>
+            <td>0.40</td>
+            <td>0.7773</td>
+            <td class="color-green"><strong>0.8249</strong></td>
+            <td class="color-green">+0.048</td>
+          </tr>
+          <tr>
+            <td>threat ⚠️</td>
+            <td>0.45</td>
+            <td>0.7382</td>
+            <td class="color-green"><strong>0.7489</strong></td>
+            <td class="color-green">+0.576 (V5'e göre)</td>
+          </tr>
+          <tr>
+            <td>insult</td>
+            <td>0.40</td>
+            <td>0.7517</td>
+            <td class="color-green"><strong>0.7824</strong></td>
+            <td class="color-green">+0.031</td>
+          </tr>
+          <tr>
+            <td>identity_hate</td>
+            <td>0.40</td>
+            <td>0.7794</td>
+            <td class="color-green"><strong>0.8129</strong></td>
+            <td class="color-green">+0.034</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="highlight-box success" style="margin-top: 16px;">
+        <h4>🏆 Hedef Aşıldı: F1-macro ≥ 0.720 → 0.7478</h4>
+        <p>V3 baseline'ını (0.693) ve V5'i (0.6967) geride bırakarak projenin en iyi modeli oldu.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 300 YORUM TESTİ -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">🧪</div>
+      Test 1: Gelişmiş 300 Yorum Analizi (advanced_toxicity_test_300)
+    </div>
+
+    <div class="card-grid">
+      <div class="stat-card">
+        <div class="stat-val color-green">~22%</div>
+        <div class="stat-label">✅ Güvenli</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val color-yellow">~43%</div>
+        <div class="stat-label">⚠️ Dikkat</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val color-red">~35%</div>
+        <div class="stat-label">🔴 Toksik</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val color-blue">8/10</div>
+        <div class="stat-label">🎯 Sarkazm Testi</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+        Bu test seti 3 bölüme ayrılmıştır: İnce İngilizce sarkazm (1-101), İngilizce arkadaşça küfür (102-201) ve Türkçe sarkastik/argo ifadeler (202-300).
+      </p>
+
+      <div class="highlight-box success">
+        <h4>✅ Güçlü Yönler</h4>
+        <ul>
+          <li>Doğrudan hakaret içeren İngilizce cümleleri yüksek skorla tespit ediyor</li>
+          <li>Türkçe örtülü sarkastik ifadeleri "Dikkat" seviyesinde doğru tutabiliyor</li>
+          <li>Açıkça tehdit içeren cümleleri (threat etiketi) başarıyla yakalıyor</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box danger">
+        <h4>❌ Zayıf Yönler — Arkadaşça Küfür Problemi</h4>
+        <ul>
+          <li>"<em>This code is badass, you sick fuck!</em>" → Model: <strong>0.84 Toksik</strong> (yanlış)</li>
+          <li>"<em>Fuck yeah, the pipeline is finally green!</em>" → Model: <strong>0.67 Toksik</strong> (yanlış)</li>
+          <li><strong>Sebep:</strong> Model, "sick fuck", "crazy bastard", "şerefsiz" gibi kelimeleri görünce bağlamı okumadan toksik damgası vuruyor (kelime bazlı yargı)</li>
+        </ul>
+      </div>
+
+      <h4 style="font-size: 14px; margin: 16px 0 12px; color: var(--text);">Temsili Sarkazm Testi Sonuçları</h4>
+      <div class="example-row">
+        <div class="verdict">✅</div>
+        <div class="text">
+          <div>"Oh great idea, killing people is a perfect solution!"</div>
+          <div class="meta">Beklenen: 🔴 Toksik | Tespit: toxic(0.82), threat(0.54) — <strong>Doğru</strong></div>
+        </div>
+      </div>
+      <div class="example-row">
+        <div class="verdict">❌</div>
+        <div class="text">
+          <div>"You're absolutely killing it, congrats!"</div>
+          <div class="meta">Beklenen: 🟢 Güvenli | Tespit: toxic(0.67) — <strong>Yanlış (false positive)</strong></div>
+        </div>
+      </div>
+      <div class="example-row">
+        <div class="verdict">✅</div>
+        <div class="text">
+          <div>"Oh harika fikir, insanları öldürmek tam çözüm" (Türkçe sarkazm)</div>
+          <div class="meta">Beklenen: 🔴 Toksik | Tespit: toxic(0.46) — <strong>Doğru</strong></div>
+        </div>
+      </div>
+      <div class="example-row">
+        <div class="verdict">✅</div>
+        <div class="text">
+          <div>"Tabii ya, sen her şeyi biliyorsun değil mi 😒" (Türkçe pasif-agresif)</div>
+          <div class="meta">Beklenen: 🟡 Sarkastik | Tespit: TEMİZ (0.061) — <strong>Doğru</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 1000 YORUM TESTİ -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📋</div>
+      Test 2: 693 Kayıtlı Geniş Test Seti — Kategori Bazlı Değerlendirme
+    </div>
+
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+      Test seti 4 kategoriye etiketlenmiş yorumlar içermektedir: Temiz, Açık Toksik, Dostane Küfürlü (arkadaşça), Örtük Sarkastik.
+      Model çıktısı ile beklenen kategori karşılaştırılarak doğruluk hesaplanmıştır.
+    </p>
+
+    <!-- ACCURACY BARS -->
+    <div class="card">
+      <div class="progress-row">
+        <div class="progress-label">
+          <span class="name">✅ Clean — Temiz (153 örnek)</span>
+          <span class="pct">%94.1 doğruluk</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-green" style="width:94.1%"></div></div>
+        <div style="font-size:12px; color: var(--text-muted); margin-top:4px;">144 doğru, 9 yanlış (9 tanesi "Dikkat" dedi, hiçbiri "Toksik" demedi)</div>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-label">
+          <span class="name">🔴 Explicit Toxic — Açık Toksik (223 örnek)</span>
+          <span class="pct">%91.0 doğruluk</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-green" style="width:91%"></div></div>
+        <div style="font-size:12px; color: var(--text-muted); margin-top:4px;">203 doğru Toksik, 20 tanesi "Dikkat"te kaldı (hafifçe formüle edilmiş hakaretler)</div>
+      </div>
+
+      <div class="progress-row" style="margin-top:16px;">
+        <div class="progress-label">
+          <span class="name">😅 Friendly Profanity — Dostane Küfürlü (157 örnek)</span>
+          <span class="pct">%55.4 doğruluk</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-red" style="width:55.4%"></div></div>
+        <div style="font-size:12px; color: var(--text-muted); margin-top:4px;">87 doğru (Güvenli/Dikkat), 70 tanesi yanlışlıkla "Toksik" sayıldı</div>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-label">
+          <span class="name">🌀 Implicit Sarcastic — Örtük Sarkastik (160 örnek)</span>
+          <span class="pct">%99.4 doğruluk</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill fill-green" style="width:99.4%"></div></div>
+        <div style="font-size:12px; color: var(--text-muted); margin-top:4px;">159 doğru, sadece 1 yanlış — model örtük toksisiteyi çok iyi "Dikkat"te tutuyor</div>
+      </div>
+    </div>
+
+    <!-- KATEGORI BREAKDOWN TABLE -->
+    <div class="card">
+      <h4 style="font-size: 14px; margin-bottom: 14px;">Kategori Bazlı Seviye Dağılımı</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Kategori</th>
+            <th>Toplam</th>
+            <th>✅ Güvenli</th>
+            <th>⚠️ Dikkat</th>
+            <th>🔴 Toksik</th>
+            <th>Doğruluk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Clean (Temiz/Nötr)</td>
+            <td>153</td>
+            <td class="color-green">144 (94.1%)</td>
+            <td class="color-yellow">9 (5.9%)</td>
+            <td class="color-red">0 (0.0%)</td>
+            <td><span class="badge badge-green">%94.1</span></td>
+          </tr>
+          <tr>
+            <td>Explicit Toxic (Açık Toksik)</td>
+            <td>223</td>
+            <td class="color-green">0 (0.0%)</td>
+            <td class="color-yellow">20 (9.0%)</td>
+            <td class="color-red">203 (91.0%)</td>
+            <td><span class="badge badge-green">%91.0</span></td>
+          </tr>
+          <tr>
+            <td>Friendly Profanity (Dostane Küfürlü)</td>
+            <td>157</td>
+            <td class="color-green">22 (14.0%)</td>
+            <td class="color-yellow">65 (41.4%)</td>
+            <td class="color-red">70 (44.6%)</td>
+            <td><span class="badge badge-red">%55.4</span></td>
+          </tr>
+          <tr>
+            <td>Implicit Sarcastic (Örtük Sarkastik)</td>
+            <td>160</td>
+            <td class="color-green">35 (21.9%)</td>
+            <td class="color-yellow">124 (77.5%)</td>
+            <td class="color-red">1 (0.6%)</td>
+            <td><span class="badge badge-green">%99.4</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GENEL -->
+    <div class="card">
+      <h4 style="font-size:14px; margin-bottom:12px;">Genel İstatistikler (693 kayıt)</h4>
+      <div class="two-col">
+        <div>
+          <div class="progress-row">
+            <div class="progress-label">
+              <span class="name">Güvenli</span><span class="pct">%29.0 (201)</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-green" style="width:29%"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label">
+              <span class="name">Dikkat</span><span class="pct">%31.5 (218)</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-yellow" style="width:31.5%"></div></div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label">
+              <span class="name">Toksik</span><span class="pct">%39.5 (274)</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill fill-red" style="width:39.5%"></div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px; color: var(--text-muted); margin-bottom:10px;">Skor İstatistikleri</div>
+          <div class="code-block" style="font-size:12px; padding:12px;">
+Ortalama toksisite skoru: <span class="number">0.503</span><br>
+Minimum skor: <span class="number">0.038</span><br>
+Maksimum skor: <span class="number">0.944</span><br>
+Standart sapma: ~0.22
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. GENEL DEĞERLENDİRME -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">💡</div>
+      Genel Değerlendirme ve Limitasyonlar
+    </div>
+
+    <div class="two-col">
+      <div class="highlight-box success">
+        <h4>✅ Model Güçlü Yönleri</h4>
+        <ul>
+          <li>Açık ve doğrudan hakaret tespiti: <strong>%91+ doğruluk</strong></li>
+          <li>Temiz metin tanıma: <strong>%94.1 doğruluk</strong></li>
+          <li>Örtük sarkastik toksisite: <strong>%99.4 doğruluk</strong></li>
+          <li>İngilizce + Türkçe çift dil desteği</li>
+          <li>Etiket bazlı threshold optimizasyonu</li>
+          <li>Focal Loss ile nadir sınıf (threat) iyileşmesi: <strong>+57.6 puan</strong></li>
+        </ul>
+      </div>
+      <div class="highlight-box danger">
+        <h4>❌ Bilinen Limitasyonlar</h4>
+        <ul>
+          <li><strong>Arkadaşça küfür problemi:</strong> "sick fuck", "crazy bastard", "şerefsiz" içeren ama dostane olan ifadelerde %44.6 false positive</li>
+          <li>Model kelime bazlı karar veriyor, tam bağlam (context) analizi yapamıyor</li>
+          <li>Türkçe argo ifadelerde tutarsız sonuçlar</li>
+          <li>Passive-aggressive (pasif saldırgan) Türkçe ifadelerde skor düşük kalabiliyor</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4 style="font-size:14px; margin-bottom:12px;">🔬 Önerilen İyileştirme — İki Aşamalı Cascade Modeli</h4>
+      <p style="font-size:13px; color: var(--text-muted); margin-bottom:12px;">
+        Mevcut tek-model yaklaşımının temel sorunu olan "bağlam körlüğü", iki aşamalı bir mimariye geçişle çözülebilir:
+      </p>
+      <div class="code-block">
+<span class="comment"># Önerilen V6 Mimarisi</span>
+Giriş cümlesi
+    │
+    ├──► Model A (Toxicity)      ← V5.2 mevcut model
+    │    "Doğrudan toksisite var mı?"
+    │    Eğitim: Jigsaw + Overfit-GM TR
+    │
+    └──► Model B (Context/Sarcasm) ← Yeni, küçük model
+         "Bağlam: övgü mü, hakaret mi?"
+         Eğitim: SARC + SemEval + dostane örüntüler
+              │
+              ▼
+         Combiner Logic
+         "İki skoru birleştir → Final karar"
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. DOSYA LİSTESİ -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon">📁</div>
+      Ek Dosyalar
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Dosya</th>
+            <th>İçerik</th>
+            <th>Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>advanced_toxicity_test_300_v5_2_sonuclar.csv</strong></td>
+            <td>300 gelişmiş test yorumu + V5.2 skorları (yorum, skor, seviye, 6 etiket skoru)</td>
+            <td>CSV</td>
+          </tr>
+          <tr>
+            <td><strong>toxicguard_1000_genis_test_seti_v5_2_sonuclar.csv</strong></td>
+            <td>693 kategorili yorum + V5.2 skorları (kategori etiketi dahil)</td>
+            <td>CSV</td>
+          </tr>
+          <tr>
+            <td><strong>toxicguard_1000_genis_test_seti.csv</strong></td>
+            <td>Girdi: 693 yorumun ham hali (yorum, kategori, dil)</td>
+            <td>CSV</td>
+          </tr>
+          <tr>
+            <td><strong>v5_2_egitim_ciktilari.txt</strong></td>
+            <td>Google Colab eğitim logları, epoch metrikleri, model kaydetme çıktıları</td>
+            <td>TXT</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>ToxicGuard V5.2 — XLM-RoBERTa-base tabanlı çok dilli toksisite tespit sistemi</p>
+  <p style="margin-top: 4px;">Mezuniyet Projesi | Model eğitimi Google Colab T4 GPU üzerinde gerçekleştirilmiştir.</p>
+</div>
+
+</body>
+</html>

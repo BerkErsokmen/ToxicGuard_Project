@@ -1,0 +1,63 @@
+ [3264/3264 13:06, Epoch 4/4]
+Epoch	Training Loss	Validation Loss	F1	Accuracy
+1	0.547813	0.551588	0.715490	0.715557
+2	0.501607	0.559219	0.729428	0.729979
+3	0.388377	0.573170	0.739149	0.739491
+4	0.313214	0.641803	0.736590	0.736729
+Writing model shards: 100%
+ 1/1 [00:06<00:00,  6.60s/it]
+Writing model shards: 100%
+ 1/1 [00:06<00:00,  6.59s/it]
+Writing model shards: 100%
+ 1/1 [00:16<00:00, 16.19s/it]
+Writing model shards: 100%
+ 1/1 [00:10<00:00, 10.96s/it]
+TrainOutput(global_step=3264, training_loss=0.4548547507501116, metrics={'train_runtime': 785.9201, 'train_samples_per_second': 132.823, 'train_steps_per_second': 4.153, 'total_flos': 6866409211729920.0, 'train_loss': 0.4548547507501116, 'epoch': 4.0})
+
+
+=== TEST SETİ DEĞERLENDİRMESİ ===
+              precision    recall  f1-score   support
+
+   non_irony       0.72      0.80      0.76      1615
+       irony       0.78      0.69      0.73      1647
+
+    accuracy                           0.75      3262
+   macro avg       0.75      0.75      0.75      3262
+weighted avg       0.75      0.75      0.75      3262
+
+F1-Macro: 0.7465  |  Accuracy: 0.7471
+
+Writing model shards: 100%
+ 1/1 [00:02<00:00,  2.71s/it]
+Model kaydedildi: toxicguard_irony_model_final/
+{
+  "model_name": "ToxicGuard-Irony",
+  "version": "V5.22-Stage2",
+  "base_model": "roberta-base",
+  "datasets": [
+    "SemEval-2018-Task3A",
+    "SARC-Reddit-Sarcasm"
+  ],
+  "train_size": 26097,
+  "val_size": 3259,
+  "test_size": 3262,
+  "f1_macro": 0.7465,
+  "accuracy": 0.7471,
+  "id2label": {
+    "0": "non_irony",
+    "1": "irony"
+  },
+  "label2id": {
+    "non_irony": 0,
+    "irony": 1
+  },
+  "irony_threshold": 0.5
+}
+
+=== HIZLI TEST ===
+🎭 [0.984] Oh great, another Monday! Just what I needed.
+🎭 [0.980] I love traffic jams, they make my day so much better.
+🎭 [0.603] The weather is beautiful today!
+🎭 [0.992] Sure, because breaking production on Friday is a great idea.
+💬 [0.288] I had a really nice time at the park.
+🎭 [0.986] Yeah right, like that plan was ever going to work.

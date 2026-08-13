@@ -1,0 +1,21 @@
+﻿yorum,toksisite_skoru,seviye,Toksik,Ağır Toksik,Müstehcen,Tehdit,Hakaret,Kimlik Nefreti
+"Thank you for the detailed article, it really helped me understand the topic better.",0.0074,Güvenli,0.0074,0.0008,0.0032,0.0005,0.0017,0.0012
+"I disagree with your point of view, but I can see why you might think that way.",0.0045,Güvenli,0.0031,0.0012,0.002,0.0003,0.002,0.0045
+Could you please clarify what you mean in the third paragraph?,0.004,Güvenli,0.0038,0.0021,0.004,0.0002,0.0032,0.0013
+"The weather is really nice today, I think I'll go for a walk.",0.0136,Güvenli,0.0082,0.0027,0.0103,0.0009,0.0086,0.0136
+You are killing it with these new updates! Amazing job!,0.0655,Güvenli,0.0655,0.0028,0.0042,0.0097,0.0015,0.0039
+"I'm not a racist, but people who live there are so lazy sometimes.",0.4002,Dikkat,0.4002,0.0025,0.1245,0.0024,0.1048,0.0499
+This movie is a complete garbage and a waste of time.,0.5715,Dikkat,0.5715,0.0048,0.0907,0.0004,0.0225,0.0221
+"You are a complete idiot, shut your mouth and never speak again.",0.9998,Toksik,0.9998,0.0535,0.8054,0.0006,0.9937,0.0032
+"Wow, you are so stupid that it physically hurts me to read your comments.",0.5626,Dikkat,0.5626,0.0025,0.0667,0.0022,0.1142,0.0042
+"Nobody cares about your pathetic opinion, loser.",0.9772,Toksik,0.9772,0.0318,0.0136,0.0005,0.4465,0.0146
+You are such a hypocrite clown.,0.9312,Toksik,0.9312,0.0071,0.047,0.0006,0.6561,0.0114
+"Go f**k yourself, you absolute piece of s**t.",0.7438,Toksik,0.7438,0.4416,0.3143,0.0014,0.5442,0.0681
+"Motherf****r, I can't believe how dumb your entire existence is.",0.6607,Toksik,0.6607,0.0074,0.2631,0.001,0.3139,0.0786
+"Kiss my a$$, you annoying b**ch.",0.479,Dikkat,0.479,0.0156,0.1504,0.0007,0.0581,0.0118
+"All gay people should just be sent to prison, they are disgusting.",0.9205,Toksik,0.9205,0.0076,0.0246,0.0018,0.1306,0.2438
+"Black people are the reason this country is failing, pack your bags and leave.",0.5635,Dikkat,0.5635,0.0021,0.0088,0.0028,0.0827,0.1912
+Muslims are all terrorists and should be banned from entering.,0.1981,Güvenli,0.1981,0.0091,0.0053,0.0001,0.0199,0.0459
+I know where you live and I am going to come to your house and kill you tonight.,0.8453,Toksik,0.4844,0.0135,0.0165,0.8453,0.0227,0.0054
+I will slit your throat if you ever post something like this again.,0.0368,Güvenli,0.0368,0.0105,0.0067,0.0124,0.0084,0.0081
+Somebody should shoot you in the head to make the world a better place.,0.2451,Güvenli,0.2451,0.0134,0.0112,0.0595,0.0475,0.0059

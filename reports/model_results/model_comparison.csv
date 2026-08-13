@@ -1,0 +1,5 @@
+﻿Model,F1 Micro,F1 Macro,Precision,Recall,ROC-AUC,Süre (sn)
+XGBoost,0.7085,0.5987,0.5527,0.6658,0.9669,14.7
+Logistic Regression,0.683,0.5643,0.452,0.8185,0.9816,0.1
+SVM,0.7038,0.5187,0.7198,0.423,0.9731,0.2
+Random Forest,0.5905,0.3803,0.5275,0.3262,0.9642,64.5

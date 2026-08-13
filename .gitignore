@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+
+# Jupyter
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (avoid committing large datasets)
+data/
+datasset/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data files (büyük dosyalar)
+datasset/*.zip
+temizlenmis_veri.csv
+deneme_temizlenmis_veri.csv
+
+# Model dosyaları (büyük - GitHub 100MB sınırı)
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.h5
+*.onnx
+*.pkl
+*.zip
+models/**/*.safetensors
+models/**/*.bin
+models/**/*.pt
+models/**/*.pth
+models/**/*.pkl
+models/**/*.zip
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Security / Sensitive Keys
+api_keys.json
+*.env
+.env
+
+# Kaggle
+kaggle_toxic_veri_pull.ipynb

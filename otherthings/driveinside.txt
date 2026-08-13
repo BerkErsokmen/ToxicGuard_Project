@@ -1,0 +1,137 @@
+/content/toxicguard_reports.zip
+/content/.config/.last_update_check.json
+/content/.config/active_config
+/content/.config/.last_survey_prompt.yaml
+/content/.config/hidden_gcloud_config_universe_descriptor_data_cache_configs.db
+/content/.config/.last_opt_in_prompt.yaml
+/content/.config/default_configs.db
+/content/.config/gce
+/content/.config/config_sentinel
+/content/.config/logs/2026.04.02/13.31.06.236912.log
+/content/.config/logs/2026.04.02/13.30.52.812826.log
+/content/.config/logs/2026.04.02/13.30.17.544197.log
+/content/.config/logs/2026.04.02/13.30.40.372331.log
+/content/.config/logs/2026.04.02/13.31.07.077226.log
+/content/.config/logs/2026.04.02/13.30.51.422062.log
+/content/.config/configurations/config_default
+/content/drive/MyDrive/ODEV_HAZIRLAMA_KURALLARI_25122020.doc
+/content/drive/MyDrive/FINAL_ODEVI_HAZIRLAMA_KURALLARI_18012021.doc
+/content/drive/MyDrive/ODEV_HAZIRLAMA_KURALLARI_05052021_IKINCI (1).doc
+/content/drive/MyDrive/ODEV_HAZIRLAMA_KURALLARI_05052021_IKINCI.doc
+/content/drive/MyDrive/4000 Essential English Words 1-Key.pdf
+/content/drive/MyDrive/4000 Essential English Words 2-Key.pdf
+/content/drive/MyDrive/4000 Essential English Words 3-Key.pdf
+/content/drive/MyDrive/4000 essential english words 1.pdf
+/content/drive/MyDrive/4000 Essential English Words 2.pdf
+/content/drive/MyDrive/4000 Essential English Words 4-Key.pdf
+/content/drive/MyDrive/4000 Essential English Words 5-Key.pdf
+/content/drive/MyDrive/4000 Essential English Words 3.pdf
+/content/drive/MyDrive/4000 Essential English Words 6-Key.pdf
+/content/drive/MyDrive/4000 Essential English Words 5.pdf
+/content/drive/MyDrive/4000 Essential English Words 4.pdf
+/content/drive/MyDrive/4000 Essential English Words 6.pdf
+/content/drive/MyDrive/aaaaaaaaaaaaaaaaaaaaaaaaaaaa.docx
+/content/drive/MyDrive/lab rapor tr.docx
+/content/drive/MyDrive/BERKersokmen-CyberOps Associa-certificate.pdf
+/content/drive/MyDrive/Başlıksız Diyagram.drawio
+/content/drive/MyDrive/4_bbbb.drawio
+/content/drive/MyDrive/Berk_Ersökmen (1).pdf
+/content/drive/MyDrive/Berk_Ersökmen.dwg
+/content/drive/MyDrive/Berk_Ersökmen.xlsx
+/content/drive/MyDrive/Berk_Ersökmen.pdf
+/content/drive/MyDrive/Berk Ersökmen.png
+/content/drive/MyDrive/Berk_Ersökmen.psd
+/content/drive/MyDrive/transkript (1).pdf
+/content/drive/MyDrive/transkript.pdf
+/content/drive/MyDrive/mezuniyet_proje.zip
+/content/drive/MyDrive/Colab Notebooks/Untitled0.ipynb
+/content/drive/MyDrive/Colab Notebooks/Untitled1.ipynb
+/content/drive/MyDrive/Colab Notebooks/Untitled2.ipynb
+/content/drive/MyDrive/Colab Notebooks/Untitled3.ipynb
+/content/drive/MyDrive/Colab Notebooks/Untitled4.ipynb
+/content/drive/MyDrive/Colab Notebooks/Untitled5.ipynb
+/content/drive/MyDrive/Colab Notebooks/ToxicGuard_Colab.ipynb
+/content/drive/MyDrive/Google AI Studio/CyberGuard Pro Dashboard
+/content/drive/MyDrive/Google AI Studio/Sana bir proje dosyası yüklüyorum, klasör yapısı en üstte yer alıyor. Lütfen tüm sorularımı bu pr...
+/content/drive/MyDrive/Google AI Studio/applet_access_history.json
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/PROJE_PLANI.md
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/.gitignore
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/.git
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/requirements.txt
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/app/app.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/data/X_test.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/data/y_test.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/data/X_train.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/data/gercek_temizlenmis_veri.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/data/y_train.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/docker/docker-compose.yml
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/docker/Dockerfile
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/datasset/sample_submission.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/datasset/test.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/datasset/test_labels.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/datasset/train.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/src/train.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/src/data_cleaning.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/src/utils.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/src/feature_extraction.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/src/__init__.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/src/predict.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/src/eda.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/reports/eda_plots/04_text_statistics.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/reports/eda_plots/05_wordclouds.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/reports/eda_plots/01_label_distribution.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/reports/eda_plots/03_label_correlation.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/reports/eda_plots/02_class_imbalance.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-08-18/reports/eda_plots/06_data_summary.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/.git
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/PROJE_PLANI.md
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/.gitignore
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/requirements.txt
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/src/train.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/src/predict.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/src/__init__.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/src/feature_extraction.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/src/utils.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/src/eda.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/src/data_cleaning.py
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/datasset/sample_submission.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/datasset/test.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/datasset/test_labels.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/datasset/train.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/docker/docker-compose.yml
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/docker/Dockerfile
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/reports/eda_plots/04_text_statistics.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/reports/eda_plots/05_wordclouds.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/reports/eda_plots/03_label_correlation.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/reports/eda_plots/01_label_distribution.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/reports/eda_plots/02_class_imbalance.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/reports/eda_plots/06_data_summary.png
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/data/X_test.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/data/X_train.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/data/gercek_temizlenmis_veri.csv
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/data/y_train.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/data/y_test.pkl
+/content/drive/MyDrive/mezuniyet_proje.worktrees/copilot-worktree-2026-03-27T08-11-21/app/app.py
+/content/drive/MyDrive/ToxicGuard/models/tfidf_vectorizer.pkl
+/content/drive/MyDrive/ToxicGuard/models/logistic_regression.pkl
+/content/drive/MyDrive/ToxicGuard/models/random_forest.pkl
+/content/drive/MyDrive/ToxicGuard/models/svm_model.pkl
+/content/drive/MyDrive/ToxicGuard/models/xgboost_model.pkl
+/content/drive/MyDrive/ToxicGuard/models/best_model.pkl
+/content/drive/MyDrive/ToxicGuard/data/gercek_temizlenmis_veri.csv
+/content/drive/MyDrive/ToxicGuard/data/y_test.pkl
+/content/drive/MyDrive/ToxicGuard/data/X_test.pkl
+/content/drive/MyDrive/ToxicGuard/reports/model_results/model_comparison.json
+/content/drive/MyDrive/ToxicGuard/reports/model_results/model_comparison.csv
+/content/drive/MyDrive/ToxicGuard/reports/eda_plots/01_label_distribution.png
+/content/drive/MyDrive/ToxicGuard/reports/eda_plots/02_class_imbalance.png
+/content/drive/MyDrive/ToxicGuard/reports/eda_plots/03_label_correlation.png
+/content/drive/MyDrive/ToxicGuard/reports/eda_plots/04_text_statistics.png
+/content/drive/MyDrive/ToxicGuard/reports/eda_plots/05_wordclouds.png
+/content/drive/MyDrive/ToxicGuard/reports/eda_plots/06_data_summary.png
+/content/sample_data/README.md
+/content/sample_data/anscombe.json
+/content/sample_data/mnist_test.csv
+/content/sample_data/california_housing_train.csv
+/content/sample_data/california_housing_test.csv
+/content/sample_data/mnist_train_small.csv

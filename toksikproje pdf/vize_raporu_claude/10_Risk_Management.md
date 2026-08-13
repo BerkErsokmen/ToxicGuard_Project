@@ -1,0 +1,11 @@
+# 7. RISK MANAGEMENT
+
+Throughout the lifecycle of the ToxicGuard project, several potential risks related to data imbalance, computational constraints, and deployment challenges have been identified. Proactive risk management strategies (Plan B) have been established to mitigate these issues and ensure the successful delivery of the toxicity detection system.
+
+| WP No | Risks | Risk Management (Plan B) |
+| :--- | :--- | :--- |
+| **1** | **Severe Class Imbalance:** Over 90% of the dataset consists of non-toxic comments, causing models to be heavily biased towards predicting the majority class. | Implement SMOTE (Synthetic Minority Over-sampling Technique) to generate synthetic minority samples, apply `class_weight='balanced'`, or utilize focal loss optimization. |
+| **2** | **Poor Baseline Model Performance:** Traditional models (Logistic Regression) may fail to capture complex, context-dependent toxicity and multi-label correlations. | Transition quickly to more robust ensemble methods like XGBoost or LightGBM. Implement ClassifierChains to capture label dependencies if OneVsRest proves inadequate. |
+| **3** | **High Latency & Resource Consumption:** Deep learning Transformer models (XLM-RoBERTa) require significant computational power and may cause severe UI lag. | Apply model quantization to reduce the model size and inference time. Implement aggressive resource caching in Streamlit. If performance remains poor, revert to a lighter model like DistilBERT. |
+| **4** | **Application Crashing on Batch Analysis:** Processing large CSV files via the Streamlit interface might exceed memory limits and cause Out-of-Memory (OOM) errors. | Implement chunk-based processing for large files. Enforce a strict maximum file upload size (e.g., 10 MB) and provide progressive loading bars to inform users of the ongoing background process. |
+| **5** | **Docker Containerization Failures:** Large model weights and numerous dependencies might cause the Docker image size to balloon, leading to deployment timeouts. | Utilize lightweight base images (e.g., `python:3.12-slim`), leverage multi-stage builds, separate model weights from the image (via mounted volumes), and maintain strict dependency versions. |

@@ -1,0 +1,47 @@
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/toxic-crusaders-1st-place-solution-overview
+
+
+
+1st : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52557
+
+2nd : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52612
+3rd (single model): https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52644
+3rd : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52762
+5th : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52630
+12th : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52702
+15th : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52563
+25th : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52647
+27th : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52719
+33rd : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52666
+34th : https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/discussion/52645
+
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/adversarial-autoencoder-3rd-place-solution-overvie
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/tpmpm-5th-place-brief-solution
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/knights-of-the-round-table-12th-place-single-model
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/zehar-2-0-15th-solution-summary-byte-pair-encoding
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/why-blends-not-work-blender
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/james-trotman-25th-place-notes-0-9872-public-0-987
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/sotoxic-27th-place-solution-overview
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/matt-motoki-33rd-place-solution-using-embedding-im
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/root-nice-square-error-34th-lots-of-fe-and-poor-un
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/toxic-crusaders-1st-place-solution-overview
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/neongen-computer-says-no-2nd-place-solution-overvi
+
+https://medium.com/@zake7749/top-1-solution-to-toxic-comment-classification-challenge-ea28dbe75054
+
+https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/writeups/adversarial-autoencoder-3rd-place-solution-overvie
+
+
+
+

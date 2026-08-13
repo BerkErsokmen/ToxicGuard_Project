@@ -1,0 +1,325 @@
+⏭️  jigsaw_bias_train.csv bulunamadı → atlanıyor.
+   Kaggle'dan indirip ToxicGuard/data/jigsaw_bias_train.csv olarak yükle.
+
+✅ SemEval-2018 Irony → 3,834 tweet
+   Alaycı: 1,911 | Normal: 1,923
+
+🛡️ ToxicGuard V5 — Sarkazm Destekli Genişletilmiş Veri Seti
+V4'ün Bilinen Açığı: Sarkazm/ironi içeren yorumlar kaçırılıyordu. Örnek: "Oh harika fikir, insanları öldürmek tam çözüm" → model güvenli diyebiliyordu.
+
+🆕 V5 Yenilikleri
+Özellik	V4	V5
+Veri boyutu	~50K	~165K
+Türkçe veri	Overfit-GM (~5K)	Overfit-GM + OffensEval-TR (~32K)
+Sarkazm desteği	❌ Yok	✅ SARC + SemEval-2018
+Threshold	Sabit 0.5	Etiket bazlı optimize
+Örtük toksisite	Zayıf	Jigsaw Unintended Bias
+📥 Manuel İndirilmesi Gereken Veri Setleri
+Bu veri setlerini Drive'a ToxicGuard/data/ klasörüne koy:
+
+Dosya	Kaynak
+train.csv	Kaggle Jigsaw (zaten mevcut)
+jigsaw_bias_train.csv	https://kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification
+train-balanced-sarcasm.csv	https://kaggle.com/datasets/danofer/sarcasm
+⚡ Google Colab Notları
+Runtime → T4 GPU seçmeyi unutma!
+Tahmini süre: ~25-40 dk (T4 GPU, 2 epoch)
+🔧 BÖLÜM 1 — Kurulum & Drive Bağlantısı
+
+[1]
+12 sn.
+# HÜCRE 1: Gerekli Paketlerin Kurulumu
+!pip install transformers datasets evaluate accelerate scikit-learn pandas numpy --quiet
+print("✅ Tüm paketler kuruldu!")
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.1/84.1 kB 2.9 MB/s eta 0:00:00
+✅ Tüm paketler kuruldu!
+
+[2]
+19 sn.
+# HÜCRE 2: Google Drive Bağlantısı
+import os
+from google.colab import drive
+drive.mount('/content/drive')
+
+BASE        = '/content/drive/MyDrive/ToxicGuard'
+MODELS_DIR  = os.path.join(BASE, 'models')
+DATA_DIR    = os.path.join(BASE, 'data')
+RESULTS_DIR = os.path.join(BASE, 'reports', 'model_results')
+
+for d in [MODELS_DIR, DATA_DIR, RESULTS_DIR]:
+    os.makedirs(d, exist_ok=True)
+
+print("✅ Klasör yolları hazır!")
+print(f"  BASE        → {BASE}")
+print(f"  MODELS_DIR  → {MODELS_DIR}")
+print(f"  DATA_DIR    → {DATA_DIR}")
+Mounted at /content/drive
+✅ Klasör yolları hazır!
+  BASE        → /content/drive/MyDrive/ToxicGuard
+  MODELS_DIR  → /content/drive/MyDrive/ToxicGuard/models
+  DATA_DIR    → /content/drive/MyDrive/ToxicGuard/data
+
+[3]
+38 sn.
+# HÜCRE 3: Kütüphaneleri Dahil Etme
+import pandas as pd
+import numpy as np
+import torch
+import json
+import warnings
+warnings.filterwarnings('ignore')
+
+from datasets import Dataset, load_dataset
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification,
+    TrainingArguments,
+    Trainer,
+    EvalPrediction
+)
+from sklearn.metrics import f1_score, roc_auc_score
+
+# ─── ETİKET SİSTEMİ (6 etiket, V4 ile uyumlu) ───────────────────────
+LABEL_COLS = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+MODEL_NAME = 'xlm-roberta-base'
+
+device_name = 'GPU Aktif! 🚀' if torch.cuda.is_available() else 'CPU ⚠️ — Runtime menüsünden T4 GPU seç!'
+print(f"Cihaz: {device_name}")
+print(f"Etiketler: {LABEL_COLS}")
+Cihaz: GPU Aktif! 🚀
+Etiketler: ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+📂 BÖLÜM 2 — Genişletilmiş Veri Seti (~165K)
+┌─────────────────────────────────┬────────┬──────────────────────────────┐
+│ Kaynak                          │ Boyut  │ Yükleme Yöntemi              │
+├─────────────────────────────────┼────────┼──────────────────────────────┤
+│ Kaggle Jigsaw (orijinal)        │ ~45K   │ Drive CSV (mevcut)           │
+│ Jigsaw Unintended Bias          │ ~50K   │ Drive CSV (manuel)           │
+│ SemEval-2018 Irony (EN)         │ ~3K    │ wget (otomatik)              │
+│ SARC Reddit (dengeli, EN)       │ ~30K   │ Drive CSV (manuel)           │
+│ Overfit-GM Turkish              │ ~5K    │ HuggingFace (otomatik)       │
+│ OffensEval-TR 2020              │ ~32K   │ HuggingFace (otomatik)       │
+└─────────────────────────────────┴────────┴──────────────────────────────┘
+
+[4]
+3 sn.
+# ─────────────────────────────────────────────────────────────────────
+# HÜCRE 4 — VERİ 1: Orijinal Kaggle Jigsaw (~45K dengeli örneklem)
+# Drive yolu: ToxicGuard/data/train.csv
+# ─────────────────────────────────────────────────────────────────────
+TRAIN_CSV = os.path.join(DATA_DIR, 'train.csv')
+
+df_orig = pd.read_csv(TRAIN_CSV)
+
+# Dengeli örnekleme: toksik yorumlar + 2x zararsız
+toxic_mask = df_orig[LABEL_COLS].sum(axis=1) > 0
+df_toxic   = df_orig[toxic_mask]
+df_safe    = df_orig[~toxic_mask].sample(n=min(len(df_toxic) * 2, (~toxic_mask).sum()), random_state=42)
+df_en      = pd.concat([df_toxic, df_safe]).sample(frac=1, random_state=42).reset_index(drop=True)
+df_en      = df_en[['comment_text'] + LABEL_COLS]
+
+print(f"✅ Kaggle Orijinal → {df_en.shape[0]:,} satır")
+print(f"   Toksik: {len(df_toxic):,} | Zararsız örneklem: {len(df_safe):,}")
+✅ Kaggle Orijinal → 48,675 satır
+   Toksik: 16,225 | Zararsız örneklem: 32,450
+
+[5]
+0 sn.
+⏭️  jigsaw_bias_train.csv bulunamadı → atlanıyor.
+   Kaggle'dan indirip ToxicGuard/data/jigsaw_bias_train.csv olarak yükle.
+
+[6]
+0 sn.
+✅ SemEval-2018 Irony → 3,834 tweet
+   Alaycı: 1,911 | Normal: 1,923
+
+[7]
+0 sn.
+⏭️  train-balanced-sarcasm.csv bulunamadı → atlanıyor.
+   Kaggle'dan indirip ToxicGuard/data/train-balanced-sarcasm.csv olarak yükle.
+
+✅ Overfit-GM Türkçe → 77,800 yorum
+
+
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'coltekin/offenseval2020_tr' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+ERROR:datasets.load:`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'coltekin/offenseval2020_tr' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+🇹🇷 OffensEval-TR 2020 yükleniyor (HuggingFace)...
+README.md: 
+ 5.95k/? [00:00<00:00, 164kB/s]
+offenseval2020_tr.py: 
+ 4.39k/? [00:00<00:00, 208kB/s]
+⚠️  OffensEval-TR yüklenemedi: Dataset scripts are no longer supported, but found offenseval2020_tr.py
+
+🔀 Tüm veri setleri birleştiriliyor...
+=======================================================
+  ✅ Kaggle Jigsaw Orijinal :  48,675 satır
+  ⏭️  Jigsaw Unintended Bias : atlandı
+  ✅ SemEval-2018 Irony     :   3,833 satır
+  ⏭️  SARC Reddit            : atlandı
+  ✅ Overfit-GM Türkçe      :  77,782 satır
+  ⏭️  OffensEval-TR          : atlandı
+=======================================================
+
+🌍 TOPLAM KARMA VERİ SETİ: 130,290 satır
+
+📊 Etiket Dağılımı:
+   toxic           :  57,330  (44.0%)
+   severe_toxic    :   1,595  (1.2%)
+   obscene         :  26,699  (20.5%)
+   threat          :     478  (0.4%)
+   insult          :  20,555  (15.8%)
+   identity_hate   :  12,513  (9.6%)
+
+
+✅ HuggingFace Dataset hazır:
+
+✅ Tokenization tamamlandı!
+
+XLMRobertaForSequenceClassification LOAD REPORT from: xlm-roberta-base
+Key                         | Status     | 
+----------------------------+------------+-
+lm_head.dense.weight        | UNEXPECTED | 
+roberta.pooler.dense.bias   | UNEXPECTED | 
+lm_head.layer_norm.weight   | UNEXPECTED | 
+lm_head.layer_norm.bias     | UNEXPECTED | 
+lm_head.bias                | UNEXPECTED | 
+lm_head.dense.bias          | UNEXPECTED | 
+roberta.pooler.dense.weight | UNEXPECTED | 
+classifier.dense.weight     | MISSING    | 
+classifier.out_proj.bias    | MISSING    | 
+classifier.out_proj.weight  | MISSING    | 
+classifier.dense.bias       | MISSING    | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING	:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+✅ Model yüklendi: 278,048,262 parametre (278M)
+
+✅ Metrik fonksiyonu tanımlandı.
+
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+✅ Trainer hazır!
+   Eğitim seti: 117,261 örnek
+   Test seti  : 13,029 örnek
+   Tahmini süre (T4 GPU): ~25-40 dk
+
+
+Epoch	Training Loss	Validation Loss	F1 Macro	F1 Micro	Roc Auc
+1	0.108207	0.097195	0.647751	0.872437	0.977727
+2	0.082530	0.084858	0.665333	0.890533	0.981816
+Writing model shards: 100%
+ 1/1 [00:08<00:00,  8.22s/it]
+Writing model shards: 100%
+ 1/1 [00:05<00:00,  5.90s/it]
+There were missing keys in the checkpoint model loaded: ['roberta.embeddings.LayerNorm.weight', 'roberta.embeddings.LayerNorm.bias', 'roberta.encoder.layer.0.attention.output.LayerNorm.weight', 'roberta.encoder.layer.0.attention.output.LayerNorm.bias', 'roberta.encoder.layer.0.output.LayerNorm.weight', 'roberta.encoder.layer.0.output.LayerNorm.bias', 'roberta.encoder.layer.1.attention.output.LayerNorm.weight', 'roberta.encoder.layer.1.attention.output.LayerNorm.bias', 'roberta.encoder.layer.1.output.LayerNorm.weight', 'roberta.encoder.layer.1.output.LayerNorm.bias', 'roberta.encoder.layer.2.attention.output.LayerNorm.weight', 'roberta.encoder.layer.2.attention.output.LayerNorm.bias', 'roberta.encoder.layer.2.output.LayerNorm.weight', 'roberta.encoder.layer.2.output.LayerNorm.bias', 'roberta.encoder.layer.3.attention.output.LayerNorm.weight', 'roberta.encoder.layer.3.attention.output.LayerNorm.bias', 'roberta.encoder.layer.3.output.LayerNorm.weight', 'roberta.encoder.layer.3.output.LayerNorm.bias', 'roberta.encoder.layer.4.attention.output.LayerNorm.weight', 'roberta.encoder.layer.4.attention.output.LayerNorm.bias', 'roberta.encoder.layer.4.output.LayerNorm.weight', 'roberta.encoder.layer.4.output.LayerNorm.bias', 'roberta.encoder.layer.5.attention.output.LayerNorm.weight', 'roberta.encoder.layer.5.attention.output.LayerNorm.bias', 'roberta.encoder.layer.5.output.LayerNorm.weight', 'roberta.encoder.layer.5.output.LayerNorm.bias', 'roberta.encoder.layer.6.attention.output.LayerNorm.weight', 'roberta.encoder.layer.6.attention.output.LayerNorm.bias', 'roberta.encoder.layer.6.output.LayerNorm.weight', 'roberta.encoder.layer.6.output.LayerNorm.bias', 'roberta.encoder.layer.7.attention.output.LayerNorm.weight', 'roberta.encoder.layer.7.attention.output.LayerNorm.bias', 'roberta.encoder.layer.7.output.LayerNorm.weight', 'roberta.encoder.layer.7.output.LayerNorm.bias', 'roberta.encoder.layer.8.attention.output.LayerNorm.weight', 'roberta.encoder.layer.8.attention.output.LayerNorm.bias', 'roberta.encoder.layer.8.output.LayerNorm.weight', 'roberta.encoder.layer.8.output.LayerNorm.bias', 'roberta.encoder.layer.9.attention.output.LayerNorm.weight', 'roberta.encoder.layer.9.attention.output.LayerNorm.bias', 'roberta.encoder.layer.9.output.LayerNorm.weight', 'roberta.encoder.layer.9.output.LayerNorm.bias', 'roberta.encoder.layer.10.attention.output.LayerNorm.weight', 'roberta.encoder.layer.10.attention.output.LayerNorm.bias', 'roberta.encoder.layer.10.output.LayerNorm.weight', 'roberta.encoder.layer.10.output.LayerNorm.bias', 'roberta.encoder.layer.11.attention.output.LayerNorm.weight', 'roberta.encoder.layer.11.attention.output.LayerNorm.bias', 'roberta.encoder.layer.11.output.LayerNorm.weight', 'roberta.encoder.layer.11.output.LayerNorm.bias'].
+There were unexpected keys in the checkpoint model loaded: ['roberta.embeddings.LayerNorm.beta', 'roberta.embeddings.LayerNorm.gamma', 'roberta.encoder.layer.0.attention.output.LayerNorm.beta', 'roberta.encoder.layer.0.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.0.output.LayerNorm.beta', 'roberta.encoder.layer.0.output.LayerNorm.gamma', 'roberta.encoder.layer.1.attention.output.LayerNorm.beta', 'roberta.encoder.layer.1.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.1.output.LayerNorm.beta', 'roberta.encoder.layer.1.output.LayerNorm.gamma', 'roberta.encoder.layer.2.attention.output.LayerNorm.beta', 'roberta.encoder.layer.2.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.2.output.LayerNorm.beta', 'roberta.encoder.layer.2.output.LayerNorm.gamma', 'roberta.encoder.layer.3.attention.output.LayerNorm.beta', 'roberta.encoder.layer.3.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.3.output.LayerNorm.beta', 'roberta.encoder.layer.3.output.LayerNorm.gamma', 'roberta.encoder.layer.4.attention.output.LayerNorm.beta', 'roberta.encoder.layer.4.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.4.output.LayerNorm.beta', 'roberta.encoder.layer.4.output.LayerNorm.gamma', 'roberta.encoder.layer.5.attention.output.LayerNorm.beta', 'roberta.encoder.layer.5.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.5.output.LayerNorm.beta', 'roberta.encoder.layer.5.output.LayerNorm.gamma', 'roberta.encoder.layer.6.attention.output.LayerNorm.beta', 'roberta.encoder.layer.6.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.6.output.LayerNorm.beta', 'roberta.encoder.layer.6.output.LayerNorm.gamma', 'roberta.encoder.layer.7.attention.output.LayerNorm.beta', 'roberta.encoder.layer.7.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.7.output.LayerNorm.beta', 'roberta.encoder.layer.7.output.LayerNorm.gamma', 'roberta.encoder.layer.8.attention.output.LayerNorm.beta', 'roberta.encoder.layer.8.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.8.output.LayerNorm.beta', 'roberta.encoder.layer.8.output.LayerNorm.gamma', 'roberta.encoder.layer.9.attention.output.LayerNorm.beta', 'roberta.encoder.layer.9.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.9.output.LayerNorm.beta', 'roberta.encoder.layer.9.output.LayerNorm.gamma', 'roberta.encoder.layer.10.attention.output.LayerNorm.beta', 'roberta.encoder.layer.10.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.10.output.LayerNorm.beta', 'roberta.encoder.layer.10.output.LayerNorm.gamma', 'roberta.encoder.layer.11.attention.output.LayerNorm.beta', 'roberta.encoder.layer.11.attention.output.LayerNorm.gamma', 'roberta.encoder.layer.11.output.LayerNorm.beta', 'roberta.encoder.layer.11.output.LayerNorm.gamma'].
+
+✅ V5 Eğitimi Tamamlandı!
+
+🔧 Her etiket için optimal threshold hesaplanıyor...
+
+Etiket             Opt. Threshold   F1@0.5   F1@opt
+----------------------------------------------------
+  toxic                        0.50   0.9357   0.9357
+  severe_toxic                 0.35   0.4902   0.5000
+  obscene                      0.55   0.9092   0.9104
+  threat                       0.10   0.0000   0.1731
+  insult                       0.45   0.7964   0.8003
+  identity_hate                0.55   0.8605   0.8609
+----------------------------------------------------
+
+✅ Optimize Threshold'lar: {'toxic': 0.5, 'severe_toxic': 0.35, 'obscene': 0.55, 'threat': 0.1, 'insult': 0.45, 'identity_hate': 0.55}
+
+
+
+📊 Final Değerlendirme:
+=======================================================
+  F1-macro (threshold=0.5)  : 0.6653
+  F1-macro (opt. threshold) : 0.6967  ✅ İyileşti!
+  ROC-AUC                   : 0.9818
+=======================================================
+
+🎉 V3 baseline (0.693) AŞILDI! → 0.6967
+
+🧪 SARKAZM & KENAR DURUM TESTLERİ
+===========================================================================
+
+  🔴 Metin   : Oh great idea, killing people is a perfect solution!
+     Beklenen: 🔴 Toksik (Sarkazm)
+     Tespit  : toxic(0.81), insult(0.75)
+     Toxic sk: 0.811 (threshold=0.5)
+
+  🔴 Metin   : You're absolutely killing it, congrats!
+     Beklenen: 🟢 Güvenli
+     Tespit  : toxic(0.53)
+     Toxic sk: 0.533 (threshold=0.5)
+
+  🟢 Metin   : Wow, what a brilliant move genius 🙄
+     Beklenen: 🟡 Sarkastik
+     Tespit  : TEMİZ ✅
+     Toxic sk: 0.386 (threshold=0.5)
+
+  🔴 Metin   : I hate you so much!
+     Beklenen: 🔴 Toksik
+     Tespit  : toxic(0.81)
+     Toxic sk: 0.807 (threshold=0.5)
+
+  🔴 Metin   : This is the best movie I've ever seen!
+     Beklenen: 🟢 Güvenli
+     Tespit  : toxic(0.53), insult(0.52)
+     Toxic sk: 0.534 (threshold=0.5)
+
+  🟢 Metin   : Oh harika fikir, insanları öldürmek tam çözüm
+     Beklenen: 🔴 Toksik TR (Sarkazm)
+     Tespit  : TEMİZ ✅
+     Toxic sk: 0.074 (threshold=0.5)
+
+  🟢 Metin   : Çok iyi iş çıkardın, bravo!
+     Beklenen: 🟢 Güvenli TR
+     Tespit  : TEMİZ ✅
+     Toxic sk: 0.004 (threshold=0.5)
+
+  🟢 Metin   : Tabii ya, sen her şeyi biliyorsun değil mi 😒
+     Beklenen: 🟡 Sarkastik TR
+     Tespit  : TEMİZ ✅
+     Toxic sk: 0.372 (threshold=0.5)
+
+  🔴 Metin   : Go kill yourself, nobody likes you
+     Beklenen: 🔴 Toksik (Tehdit)
+     Tespit  : toxic(0.92), threat(0.16), insult(0.55)
+     Toxic sk: 0.920 (threshold=0.5)
+
+  🟢 Metin   : That presentation was... interesting.
+     Beklenen: 🟡 Pasif-Agresif
+     Tespit  : TEMİZ ✅
+     Toxic sk: 0.011 (threshold=0.5)
+
+
+     Writing model shards: 100%
+ 1/1 [00:07<00:00,  7.52s/it]
+🎉 V5 başarıyla kaydedildi!
+   Model       : /content/drive/MyDrive/ToxicGuard/models/toxicguard_v5_sarcasm
+   Thresholds  : /content/drive/MyDrive/ToxicGuard/models/toxicguard_v5_sarcasm/v5_thresholds.json
+   Sonuç özeti : /content/drive/MyDrive/ToxicGuard/reports/model_results/v5_results_summary.json
+
+📊 FINAL SONUÇLAR:
+   F1-macro  : 0.6967
+   ROC-AUC   : 0.9818
+
+   
+📊 ToxicGuard Versiyon Karşılaştırması:
+      Versiyon F1-macro ROC-AUC                  Veri Sarkazm Türkçe
+    V1 XGBoost    0.599   0.967             Kaggle EN       ❌      ❌
+   V2 SVM opt.    0.599   0.967             Kaggle EN       ❌      ❌
+ V3 DistilBERT    0.693   0.978     Kaggle EN dengeli       ❌      ❌
+V4 XLM-RoBERTa        —       —          EN+TR (~50K)      ⚠️     ⚠️
+ V5 (Bu model)   0.6967  0.9818 EN+TR+Sarkazm (~165K)       ✅      ✅
+
+✅ Kaydedildi: /content/drive/MyDrive/ToxicGuard/reports/model_results/version_comparison_v5.csv
+
+
+
+
